@@ -76,7 +76,7 @@ if isatty # running in interactive terminal, not just process
 	# theme
 	if defaults read -g AppleInterfaceStyle >/dev/null 2>/dev/null
 		set -x THEME "dark"
-		kitty @ --to unix:/tmp/mykitty set-colors --all --configured ~/.config/kitty/kitty-themes/themes/Dark
+		kitty @ --to unix:/tmp/mykitty set-colors --all --configured ~/.config/kitty/kitty-themes/themes/Dark.conf
 	else
 		set -x THEME "light"
 		kitty @ --to unix:/tmp/mykitty set-colors --all --configured ~/.config/kitty/kitty-themes/themes/Light.conf
