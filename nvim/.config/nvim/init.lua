@@ -192,7 +192,17 @@ vim.keymap.set('n', 'X', '<cmd>s/<C-r><C-w>//g<Left><Left>')
 
 -- plugin keybindings
 
-vim.keymap.set('n', '<Tab>', require('telescope.builtin').find_files)
+vim.keymap.set('n', '<Tab>', function ()
+  require('telescope.builtin').find_files({
+    find_command = {
+      'fd',
+      '--hidden',
+      '--type', 'f',
+      '--exclude', '.git/',
+      '--strip-cwd-prefix'
+    }
+  })
+end)
 vim.keymap.set('n', '<S-Tab>', require('telescope.builtin').live_grep)
 vim.keymap.set('n', '<leader>dg', require('telescope.builtin').diagnostics)
 
