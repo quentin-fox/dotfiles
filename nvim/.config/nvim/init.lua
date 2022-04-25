@@ -1,7 +1,19 @@
+-- vim:foldmethod=marker
+
+--    _         _  _       _
+--   (_)       (_)| |     | |
+--    _  _ __   _ | |_    | | _   _   __ _
+--   | || '_ \ | || __|   | || | | | / _` |
+--   | || | | || || |_  _ | || |_| || (_| |
+--   |_||_| |_||_| \__|(_)|_| \__,_| \__,_|
+
+-- {{{ modules
+
 require('plugin')
 require('lsp')
 
--- global options
+-- }}}
+-- {{{ global options
 
 vim.opt.hidden = false
 vim.opt.shell = '/opt/homebrew/bin/fish'
@@ -28,13 +40,50 @@ vim.opt.shiftwidth= 2
 vim.opt.wrapmargin = 0
 vim.opt.autoindent = true
 
--- colorscheme
+-- diagnostic
+
+vim.diagnostic.config{
+  severity_sort = true,
+}
+
+-- }}}
+-- {{{ colorscheme
 
 vim.cmd('colorscheme onedark')
 vim.opt.background = 'dark'
 vim.opt.termguicolors = true
 
--- plugin setup
+local colors = {
+  error = '#be5046',
+  warn = '#e5c07b',
+  info = '#abb2bf'
+}
+
+-- open hover window after updatetime without cursor moving
+vim.opt.updatetime = 1500
+local group = vim.api.nvim_create_augroup('DiagnosticCursorHold', { clear = true })
+vim.api.nvim_create_autocmd('CursorHold', { callback = vim.diagnostic.open_float, group = group })
+
+vim.highlight.create('DiagnosticError', { guifg = colors.error }, false)
+vim.highlight.create('DiagnosticWarn', { guifg = colors.warn }, false)
+vim.highlight.create('DiagnosticInfo', { guifg = colors.info }, false)
+
+-- no underlines desired
+vim.highlight.create('DiagnosticUnderlineError', { guifg = colors.error, gui = 'NONE'  }, false)
+vim.highlight.create('DiagnosticUnderlineWarn', { guifg = colors.warn, gui = 'NONE' }, false)
+vim.highlight.create('DiagnosticUnderlineInfo', { guifg = colors.info, gui = 'NONE' }, false)
+
+vim.highlight.create('DiagnosticStatusError', {guifg = '#262626', guibg = colors.error }, false)
+vim.highlight.create('DiagnosticStatusWarn', {guifg = '#262626', guibg = colors.warn }, false)
+vim.highlight.create('DiagnosticStatusInfo', {guifg = '#262626', guibg = colors.info }, false)
+
+vim.cmd([[sign define DiagnosticSignError text=> texthl=DiagnosticSignError linehl= numhl=]])
+vim.cmd([[sign define DiagnosticSignWarn text=? texthl=DiagnosticSignWarn linehl= numhl=]])
+vim.cmd([[sign define DiagnosticSignInfo text=? texthl=DiagnosticSignInfo linehl= numhl=]])
+
+
+-- }}}
+-- {{{ plugin setup
 
 require('colorizer').setup()
 
@@ -78,10 +127,6 @@ require('nvim-treesitter.configs').setup{
   },
 }
 
-vim.highlight.create('DiagnosticErrorSign', {guifg = '#262626', guibg = '#be5046' }, false)
-vim.highlight.create('DiagnosticWarnSign', {guifg = '#262626', guibg = '#e5c07b' }, false)
-vim.highlight.create('DiagnosticInfoSign', {guifg = '#262626', guibg = '#abb2bf' }, false)
-
 require('lualine').setup{
   options = {
     icons_enabled = false,
@@ -103,9 +148,9 @@ require('lualine').setup{
           info = '● ',
         },
         diagnostics_color = {
-          error = 'DiagnosticErrorSign',
-          warn = 'DiagnosticWarnSign',
-          info = 'DiagnosticInfoSign',
+          error = 'DiagnosticStatusError',
+          warn = 'DiagnosticStatusWarn',
+          info = 'DiagnosticStatusInfo',
         },
         colored = true,
         update_in_insert = false,
@@ -137,7 +182,8 @@ require('nnn').setup{
   },
 }
 
--- basic keybindings
+-- }}}
+-- {{{ basic keybindings
 
 -- system c&p
 vim.keymap.set('v', 'sy', '"+y')
@@ -178,7 +224,7 @@ vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]])
 vim.keymap.set('n', 'j', function()
   return vim.v.count == 0 and 'gj' or 'j'
 end, { expr = true })
-vim.keymap.set('n', 'g', function()
+vim.keymap.set('n', 'k', function()
   return vim.v.count == 0 and 'gk' or 'k'
 end, { expr = true })
 
@@ -190,7 +236,16 @@ vim.keymap.set('n', 'M', 'gUl')
 
 vim.keymap.set('n', 'X', '<cmd>s/<C-r><C-w>//g<Left><Left>')
 
--- plugin keybindings
+-- clear highlight
+
+vim.keymap.set('n', '-', '<cmd>nohlsearch<Cr>', { silent = true })
+
+-- jump forward that doesn't conflict with tab (<C-i> = <Tab>)
+
+vim.keymap.set('n', '<C-p>', '<C-i>')
+
+-- }}}
+-- {{{ plugin keybindings
 
 vim.keymap.set('n', '<Tab>', function ()
   require('telescope.builtin').find_files({
@@ -210,3 +265,5 @@ vim.keymap.set('n', '~', '<cmd>Git<Cr>')
 
 vim.keymap.set('n', 'gn', '<cmd>NnnPicker<Cr>')
 vim.keymap.set('n', 'gm', '<cmd>NnnPicker %:p:h<Cr>')
+
+-- }}}
