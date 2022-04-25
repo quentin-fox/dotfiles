@@ -266,4 +266,6 @@ vim.keymap.set('n', '~', '<cmd>Git<Cr>')
 vim.keymap.set('n', 'gn', '<cmd>NnnPicker<Cr>')
 vim.keymap.set('n', 'gm', '<cmd>NnnPicker %:p:h<Cr>')
 
+vim.keymap.set('n', '<leader>pr', '<cmd>EslintFixAll<Cr>')
+
 -- }}}
