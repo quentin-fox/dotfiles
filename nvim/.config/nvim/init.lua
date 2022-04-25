@@ -123,6 +123,7 @@ require('nvim-treesitter.configs').setup{
     "java",
     "javascript",
     "lua",
+    "markdown",
     "scss",
     "svelte",
     "tsx",
