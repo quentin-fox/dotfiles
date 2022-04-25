@@ -42,8 +42,24 @@ vim.opt.autoindent = true
 
 -- diagnostic
 
+local min_severity = {
+  min = vim.diagnostic.severity.INFO
+}
+
 vim.diagnostic.config{
   severity_sort = true,
+  underline = {
+    severity = min_severity,
+  },
+  virtual_text = {
+    severity = min_severity,
+  },
+  signs = {
+    severity = min_severity,
+  },
+  float = {
+    severity = min_severity,
+  },
 }
 
 -- }}}
@@ -55,8 +71,9 @@ vim.opt.termguicolors = true
 
 local colors = {
   error = '#be5046',
-  warn = '#e5c07b',
-  info = '#abb2bf'
+  warn =  '#e5c07b',
+  info =  '#abb2bf',
+  hint =  '#abc2af',
 }
 
 -- open hover window after updatetime without cursor moving
@@ -67,19 +84,23 @@ vim.api.nvim_create_autocmd('CursorHold', { callback = vim.diagnostic.open_float
 vim.highlight.create('DiagnosticError', { guifg = colors.error }, false)
 vim.highlight.create('DiagnosticWarn', { guifg = colors.warn }, false)
 vim.highlight.create('DiagnosticInfo', { guifg = colors.info }, false)
+vim.highlight.create('DiagnosticHint', { guifg = colors.hint }, false)
 
 -- no underlines desired
 vim.highlight.create('DiagnosticUnderlineError', { guifg = colors.error, gui = 'NONE'  }, false)
 vim.highlight.create('DiagnosticUnderlineWarn', { guifg = colors.warn, gui = 'NONE' }, false)
 vim.highlight.create('DiagnosticUnderlineInfo', { guifg = colors.info, gui = 'NONE' }, false)
+vim.highlight.create('DiagnosticUnderlineHint', { guifg = colors.hint, gui = 'NONE' }, false)
 
 vim.highlight.create('DiagnosticStatusError', {guifg = '#262626', guibg = colors.error }, false)
 vim.highlight.create('DiagnosticStatusWarn', {guifg = '#262626', guibg = colors.warn }, false)
 vim.highlight.create('DiagnosticStatusInfo', {guifg = '#262626', guibg = colors.info }, false)
+vim.highlight.create('DiagnosticStatusHint', {guifg = '#262626', guibg = colors.hint }, false)
 
 vim.cmd([[sign define DiagnosticSignError text=> texthl=DiagnosticSignError linehl= numhl=]])
 vim.cmd([[sign define DiagnosticSignWarn text=? texthl=DiagnosticSignWarn linehl= numhl=]])
 vim.cmd([[sign define DiagnosticSignInfo text=? texthl=DiagnosticSignInfo linehl= numhl=]])
+vim.cmd([[sign define DiagnosticSignInfo text=? texthl=DiagnosticSignHint linehl= numhl=]])
 
 
 -- }}}
@@ -131,8 +152,8 @@ require('lualine').setup{
   options = {
     icons_enabled = false,
     theme = 'auto',
-    component_separators = { left = ' ', right = ' ' },
-    section_separators = { left = ' ', right = ' ' },
+    component_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
   },
   sections = {
     lualine_a = {'mode'},
@@ -180,6 +201,13 @@ require('nnn').setup{
     ['<C-x>'] = 'split',
     ['<C-v>'] = 'vsplit',
   },
+}
+
+require('telescope').setup{
+  defaults = {
+    layout_strategy = 'vertical',
+    layout_config = { height = 0.8 }
+  }
 }
 
 -- }}}
@@ -247,7 +275,7 @@ vim.keymap.set('n', '<C-p>', '<C-i>')
 -- }}}
 -- {{{ plugin keybindings
 
-vim.keymap.set('n', '<Tab>', function ()
+vim.keymap.set('n', '<Tab>', function()
   require('telescope.builtin').find_files({
     find_command = {
       'fd',
@@ -258,8 +286,14 @@ vim.keymap.set('n', '<Tab>', function ()
     }
   })
 end)
+
+vim.keymap.set('n', '<leader>dg', function()
+  require('telescope.builtin').diagnostics({
+    severity_limit = vim.diagnostic.severity.INFO
+  })
+end)
+
 vim.keymap.set('n', '<S-Tab>', require('telescope.builtin').live_grep)
-vim.keymap.set('n', '<leader>dg', require('telescope.builtin').diagnostics)
 
 vim.keymap.set('n', '~', '<cmd>Git<Cr>')
 
