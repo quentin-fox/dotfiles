@@ -26,17 +26,17 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.textwidth = 0
 vim.opt.wrap = true
-vim.opt.list = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.pumheight = 5
 
 -- default indentation
 
+vim.opt.list = true
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
-vim.opt.shiftwidth= 2
+vim.opt.shiftwidth = 2
 vim.opt.wrapmargin = 0
 vim.opt.autoindent = true
 
