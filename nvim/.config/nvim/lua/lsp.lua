@@ -16,6 +16,7 @@ local on_attach = function(_, bufnr)
     { 'gi',    vim.lsp.buf.implementation },
     { 'K',     vim.lsp.buf.hover },
     { '<C-s>', vim.lsp.buf.signature_help },
+    { '<C-d>', vim.diagnostic.open_float },
     { 'grr',   vim.lsp.buf.references },
     { 'grn',   vim.lsp.buf.rename },
     { 'ga',    vim.lsp.buf.code_action }
