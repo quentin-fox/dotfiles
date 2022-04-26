@@ -105,8 +105,10 @@ vim.cmd([[sign define DiagnosticSignWarn text=? texthl=DiagnosticSignWarn linehl
 vim.cmd([[sign define DiagnosticSignInfo text=? texthl=DiagnosticSignInfo linehl= numhl=]])
 vim.cmd([[sign define DiagnosticSignInfo text=? texthl=DiagnosticSignHint linehl= numhl=]])
 
-vim.highlight.create('Folded', { guifg = '#6c6c6c', guibg = '#1c1c1c' })
-vim.highlight.create('CursorLineNr', { guifg = 'DarkGray', guibg = 'NONE' })
+vim.highlight.create('Folded', { guifg = 'Gray', guibg = '#1c1c1c' })
+vim.highlight.create('CursorLineNr', { guifg = 'Gray', guibg = 'NONE' })
+
+vim.highlight.link('VertSplit', 'Normal', true)
 
 -- }}}
 -- {{{ plugin setup
@@ -213,6 +215,16 @@ require('telescope').setup {
   defaults = {
     layout_strategy = 'vertical',
     layout_config = { height = 0.8 }
+  }
+}
+
+require('dressing').setup{
+  input = {
+    enabled = true,
+    winblend = 0,
+    border = 'rounded',
+    winhighlight = 'NormalFloat:Normal',
+    insert_only = false
   }
 }
 
