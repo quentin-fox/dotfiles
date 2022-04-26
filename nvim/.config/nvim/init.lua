@@ -30,6 +30,9 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.pumheight = 5
 
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = 'number'
+
 -- default indentation
 
 vim.opt.list = true
@@ -102,6 +105,8 @@ vim.cmd([[sign define DiagnosticSignWarn text=? texthl=DiagnosticSignWarn linehl
 vim.cmd([[sign define DiagnosticSignInfo text=? texthl=DiagnosticSignInfo linehl= numhl=]])
 vim.cmd([[sign define DiagnosticSignInfo text=? texthl=DiagnosticSignHint linehl= numhl=]])
 
+vim.highlight.create('Folded', { guifg = '#6c6c6c', guibg = '#1c1c1c' })
+vim.highlight.create('CursorLineNr', { guifg = 'DarkGray', guibg = 'NONE' })
 
 -- }}}
 -- {{{ plugin setup
