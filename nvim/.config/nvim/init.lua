@@ -46,7 +46,7 @@ local min_severity = {
   min = vim.diagnostic.severity.INFO
 }
 
-vim.diagnostic.config{
+vim.diagnostic.config {
   severity_sort = true,
   underline = {
     severity = min_severity,
@@ -71,9 +71,9 @@ vim.opt.termguicolors = true
 
 local colors = {
   error = '#be5046',
-  warn =  '#e5c07b',
-  info =  '#abb2bf',
-  hint =  '#abc2af',
+  warn = '#e5c07b',
+  info = '#abb2bf',
+  hint = '#abc2af',
 }
 
 -- open hover window after updatetime without cursor moving
@@ -87,15 +87,15 @@ vim.highlight.create('DiagnosticInfo', { guifg = colors.info }, false)
 vim.highlight.create('DiagnosticHint', { guifg = colors.hint }, false)
 
 -- no underlines desired
-vim.highlight.create('DiagnosticUnderlineError', { guifg = colors.error, gui = 'NONE'  }, false)
+vim.highlight.create('DiagnosticUnderlineError', { guifg = colors.error, gui = 'NONE' }, false)
 vim.highlight.create('DiagnosticUnderlineWarn', { guifg = colors.warn, gui = 'NONE' }, false)
 vim.highlight.create('DiagnosticUnderlineInfo', { guifg = colors.info, gui = 'NONE' }, false)
 vim.highlight.create('DiagnosticUnderlineHint', { guifg = colors.hint, gui = 'NONE' }, false)
 
-vim.highlight.create('DiagnosticStatusError', {guifg = '#262626', guibg = colors.error }, false)
-vim.highlight.create('DiagnosticStatusWarn', {guifg = '#262626', guibg = colors.warn }, false)
-vim.highlight.create('DiagnosticStatusInfo', {guifg = '#262626', guibg = colors.info }, false)
-vim.highlight.create('DiagnosticStatusHint', {guifg = '#262626', guibg = colors.hint }, false)
+vim.highlight.create('DiagnosticStatusError', { guifg = '#262626', guibg = colors.error }, false)
+vim.highlight.create('DiagnosticStatusWarn', { guifg = '#262626', guibg = colors.warn }, false)
+vim.highlight.create('DiagnosticStatusInfo', { guifg = '#262626', guibg = colors.info }, false)
+vim.highlight.create('DiagnosticStatusHint', { guifg = '#262626', guibg = colors.hint }, false)
 
 vim.cmd([[sign define DiagnosticSignError text=> texthl=DiagnosticSignError linehl= numhl=]])
 vim.cmd([[sign define DiagnosticSignWarn text=? texthl=DiagnosticSignWarn linehl= numhl=]])
@@ -108,11 +108,11 @@ vim.cmd([[sign define DiagnosticSignInfo text=? texthl=DiagnosticSignHint linehl
 
 require('colorizer').setup()
 
-require('nvim-autopairs').setup{
+require('nvim-autopairs').setup {
   check_ts = true,
 }
 
-require('nvim-treesitter.configs').setup{
+require('nvim-treesitter.configs').setup {
   ensure_installed = {
     "css",
     "fish",
@@ -149,7 +149,7 @@ require('nvim-treesitter.configs').setup{
   },
 }
 
-require('lualine').setup{
+require('lualine').setup {
   options = {
     icons_enabled = false,
     theme = 'auto',
@@ -157,8 +157,8 @@ require('lualine').setup{
     section_separators = { left = '', right = '' },
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'filename'},
+    lualine_a = { 'mode' },
+    lualine_b = { 'filename' },
     lualine_c = {
       {
         'diagnostics',
@@ -180,20 +180,20 @@ require('lualine').setup{
       }
     },
     lualine_x = {},
-    lualine_y = {'progress'},
-    lualine_z = {'location'},
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' },
   },
   inactive_sections = {
     lualine_a = {},
-    lualine_b = {'filename'},
+    lualine_b = { 'filename' },
     lualine_c = {},
     lualine_x = {},
-    lualine_y = {'progress'},
-    lualine_z = {'location'},
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' },
   },
 }
 
-require('nnn').setup{
+require('nnn').setup {
   layout = {
     window = { width = 0.9, height = 0.6, highlight = 'Debug' },
   },
@@ -204,7 +204,7 @@ require('nnn').setup{
   },
 }
 
-require('telescope').setup{
+require('telescope').setup {
   defaults = {
     layout_strategy = 'vertical',
     layout_config = { height = 0.8 }
@@ -238,7 +238,7 @@ vim.keymap.set('n', 'gp', '`v`')
 
 -- simpler window navigation
 
-local win_keys = {'<C-h>', '<C-j>', '<C-k>', '<C-l>'}
+local win_keys = { '<C-h>', '<C-j>', '<C-k>', '<C-l>' }
 
 for _, key in ipairs(win_keys) do
   vim.keymap.set('n', key, '<C-w>' .. key)
@@ -301,6 +301,8 @@ vim.keymap.set('n', '~', '<cmd>Git<Cr>')
 vim.keymap.set('n', 'gn', '<cmd>NnnPicker<Cr>')
 vim.keymap.set('n', 'gm', '<cmd>NnnPicker %:p:h<Cr>')
 
-vim.keymap.set('n', '<leader>pr', '<cmd>EslintFixAll<Cr>')
+vim.keymap.set('n', '<leader>pr', function()
+  vim.lsp.buf.formatting_seq_sync(nil, 2500, { 'null-ls' })
+end)
 
 -- }}}

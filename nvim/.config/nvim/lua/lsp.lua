@@ -31,7 +31,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local lspconfig = require('lspconfig')
-local servers = { 'gopls', 'golangci_lint_ls', 'tsserver', 'sumneko_lua', 'svelte', 'eslint' }
+local servers = { 'gopls', 'golangci_lint_ls', 'tsserver', 'sumneko_lua', 'svelte' }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup{
@@ -96,4 +96,17 @@ cmp.setup{
   sources = {
     { name = 'nvim_lsp' },
   },
+}
+
+local null_ls = require('null-ls')
+
+null_ls.setup{
+  sources = {
+    null_ls.builtins.formatting.eslint,
+    null_ls.builtins.diagnostics.eslint,
+    null_ls.builtins.code_actions.eslint,
+    null_ls.builtins.formatting.golines,
+    null_ls.builtins.formatting.gofmt,
+    null_ls.builtins.formatting.goimports,
+  }
 }
