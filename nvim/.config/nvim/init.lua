@@ -218,14 +218,24 @@ require('telescope').setup {
   }
 }
 
-require('dressing').setup{
+require('dressing').setup {
   input = {
     enabled = true,
     winblend = 0,
     border = 'rounded',
     winhighlight = 'NormalFloat:Normal',
     insert_only = false
-  }
+  },
+  select = {
+    enabled = true,
+    backend = { 'builtin' },
+    builtin = {
+      winblend = 0,
+      border = 'rounded',
+      winhighlight = 'NormalFloat:Normal',
+      relative = 'cursor',
+    },
+  },
 }
 
 -- }}}
@@ -317,9 +327,5 @@ vim.keymap.set('n', '~', '<cmd>Git<Cr>')
 
 vim.keymap.set('n', 'gn', '<cmd>NnnPicker<Cr>')
 vim.keymap.set('n', 'gm', '<cmd>NnnPicker %:p:h<Cr>')
-
-vim.keymap.set('n', '<leader>pr', function()
-  vim.lsp.buf.formatting_seq_sync(nil, 2500, { 'null-ls' })
-end)
 
 -- }}}

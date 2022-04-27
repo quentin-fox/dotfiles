@@ -8,7 +8,7 @@ local function with_split(cmd, fn)
   end
 end
 
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   local maps = {
     { 'gdd',   vim.lsp.buf.definition },
     { 'gdv',   with_split('vs', vim.lsp.buf.definition) },
@@ -42,6 +42,21 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
+
+lspconfig.eslint.setup{
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+
+    vim.keymap.set('n', '<leader>pr', function()
+      local params = vim.lsp.util.make_formatting_params({})
+      client.request('textDocument/formatting', params, nil, bufnr) 
+    end, {buffer = bufnr})
+  end,
+  capabilities = capabilities,
+  flags = {
+    debounce_text_changes = 150,
+  },
+}
 
 local luadev = require('lua-dev').setup{
   lspconfig = {
@@ -96,17 +111,4 @@ cmp.setup{
   sources = {
     { name = 'nvim_lsp' },
   },
-}
-
-local null_ls = require('null-ls')
-
-null_ls.setup{
-  sources = {
-    null_ls.builtins.formatting.eslint,
-    null_ls.builtins.diagnostics.eslint,
-    null_ls.builtins.code_actions.eslint,
-    null_ls.builtins.formatting.golines,
-    null_ls.builtins.formatting.gofmt,
-    null_ls.builtins.formatting.goimports,
-  }
 }
