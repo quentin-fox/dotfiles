@@ -321,7 +321,11 @@ vim.keymap.set('n', '<leader>dg', function()
   })
 end)
 
-vim.keymap.set('n', '<S-Tab>', require('telescope.builtin').live_grep)
+vim.keymap.set('n', '<S-Tab>', function()
+  require('telescope.builtin').live_grep({
+    additional_args = function() return { '--hidden', '--glob', '!.git/' } end
+  })
+end)
 
 vim.keymap.set('n', '~', '<cmd>Git<Cr>')
 
