@@ -228,7 +228,7 @@ require('dressing').setup {
   },
   select = {
     enabled = true,
-    backend = { 'builtin' },
+    backend = { 'telescope' },
     builtin = {
       winblend = 0,
       border = 'rounded',
