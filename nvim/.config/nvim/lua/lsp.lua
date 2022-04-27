@@ -45,8 +45,17 @@ local function format_on_save(client, bufnr)
     group = group,
     buffer = bufnr,
     callback = function()
+      -- largely copied from vim.lsp.buf.formatting_sync
+      -- but applied to one single lsp client
+      -- has to be synchronous so that the changes are made to the buffer before saving to disk
       local formatting_params = vim.lsp.util.make_formatting_params({})
-      client.request('textDocument/formatting', formatting_params, nil, bufnr)
+      local result, err = client.request_sync('textDocument/formatting', formatting_params, 500, bufnr)
+
+      if result and result.result then
+        vim.lsp.util.apply_text_edits(result.result, bufnr, client.offset_encoding)
+      elseif err then
+        vim.notify('vim.lsp.buf.formatting_sync: ' .. err, vim.log.levels.WARN)
+      end
     end,
   })
 end
