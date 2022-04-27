@@ -10,16 +10,16 @@ end
 
 local on_attach = function(client, bufnr)
   local maps = {
-    { 'gdd',   vim.lsp.buf.definition },
-    { 'gdv',   with_split('vs', vim.lsp.buf.definition) },
-    { 'gdx',   with_split('sp', vim.lsp.buf.definition) },
-    { 'gi',    vim.lsp.buf.implementation },
-    { 'K',     vim.lsp.buf.hover },
+    { 'gdd', vim.lsp.buf.definition },
+    { 'gdv', with_split('vs', vim.lsp.buf.definition) },
+    { 'gdx', with_split('sp', vim.lsp.buf.definition) },
+    { 'gi', vim.lsp.buf.implementation },
+    { 'K', vim.lsp.buf.hover },
     { '<C-s>', vim.lsp.buf.signature_help },
     { '<C-d>', vim.diagnostic.open_float },
-    { 'grr',   vim.lsp.buf.references },
-    { 'grn',   vim.lsp.buf.rename },
-    { 'ga',    vim.lsp.buf.code_action }
+    { 'grr', vim.lsp.buf.references },
+    { 'grn', vim.lsp.buf.rename },
+    { 'ga', vim.lsp.buf.code_action }
   }
 
   for _, map in ipairs(maps) do
@@ -31,11 +31,48 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local lspconfig = require('lspconfig')
-local servers = { 'gopls', 'golangci_lint_ls', 'tsserver', 'sumneko_lua', 'svelte' }
+
+local function formatting_keymap(client, bufnr)
+  vim.keymap.set('n', '<leader>pr', function()
+    local params = vim.lsp.util.make_formatting_params({})
+    client.request('textDocument/formatting', params, nil, bufnr)
+  end, { buffer = bufnr })
+end
+
+local function format_on_save(client, bufnr)
+  local group = vim.api.nvim_create_augroup(client.name .. 'FormatOnSave', { clear = true })
+  vim.api.nvim_create_autocmd('BufWritePre', {
+    group = group,
+    buffer = bufnr,
+    callback = function()
+      local formatting_params = vim.lsp.util.make_formatting_params({})
+      client.request('textDocument/formatting', formatting_params, nil, bufnr)
+    end,
+  })
+end
+
+local servers = {
+  { 'gopls', extra_on_attach = { format_on_save } },
+  { 'golangci_lint_ls' },
+  { 'tsserver' },
+  { 'eslint', extra_on_attach = { formatting_keymap } },
+  { 'svelte' },
+}
 
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup{
-    on_attach = on_attach,
+  local name = lsp[1]
+  lspconfig[name].setup {
+    on_attach = function(client, bufnr)
+      on_attach(client, bufnr)
+
+      if lsp.extra_on_attach == nil then
+        return
+      end
+
+      for _, cb in ipairs(lsp.extra_on_attach) do
+        cb(client, bufnr)
+      end
+    end,
     capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
@@ -43,24 +80,12 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-lspconfig.eslint.setup{
-  on_attach = function(client, bufnr)
-    on_attach(client, bufnr)
-
-    vim.keymap.set('n', '<leader>pr', function()
-      local params = vim.lsp.util.make_formatting_params({})
-      client.request('textDocument/formatting', params, nil, bufnr) 
-    end, {buffer = bufnr})
-  end,
-  capabilities = capabilities,
-  flags = {
-    debounce_text_changes = 150,
-  },
-}
-
-local luadev = require('lua-dev').setup{
+local luadev = require('lua-dev').setup {
   lspconfig = {
-    on_attach = on_attach,
+    on_attach = function(client, bufnr)
+      on_attach(client, bufnr)
+      format_on_save(client, bufnr)
+    end,
     capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
@@ -73,7 +98,7 @@ lspconfig.sumneko_lua.setup(luadev)
 local luasnip = require('luasnip')
 local cmp = require('cmp')
 
-cmp.setup{
+cmp.setup {
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
