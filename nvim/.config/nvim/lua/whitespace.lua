@@ -1,19 +1,19 @@
 local M = {}
 
 function M.use_tabs(width)
-  vim.opt.expandtab = false
-  vim.opt.tabstop = width
-  vim.opt.softtabstop = width
-  vim.opt.shiftwidth = width
-  vim.opt.list = false
+  vim.bo.expandtab = false
+  vim.bo.tabstop = width
+  vim.bo.softtabstop = width
+  vim.bo.shiftwidth = width
+  vim.bo.list = false
 end
 
 function M.use_spaces(width)
-  vim.opt.expandtab = true
-  vim.opt.tabstop = width
-  vim.opt.softtabstop = width
-  vim.opt.shiftwidth = width
-  vim.opt.list = true
+  vim.bo.expandtab = true
+  vim.bo.tabstop = width
+  vim.bo.softtabstop = width
+  vim.bo.shiftwidth = width
+  vim.bo.list = true
 end
 
 return M
