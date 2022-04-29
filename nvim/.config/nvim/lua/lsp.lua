@@ -30,6 +30,18 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
+require('nvim-lsp-installer').setup {
+  ensure_installed = {
+    'eslint',
+    'gopls',
+    'golangci_lint_ls',
+    'tsserver',
+    'sumneko_lua',
+    'svelte',
+  },
+  automatic_installation = true,
+}
+
 local lspconfig = require('lspconfig')
 
 local function formatting_keymap(client, bufnr)
