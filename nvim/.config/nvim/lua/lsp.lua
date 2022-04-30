@@ -31,14 +31,6 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 require('nvim-lsp-installer').setup {
-  ensure_installed = {
-    'eslint',
-    'gopls',
-    'golangci_lint_ls',
-    'tsserver',
-    'sumneko_lua',
-    'svelte',
-  },
   automatic_installation = true,
 }
 
@@ -78,6 +70,7 @@ local servers = {
   { 'tsserver' },
   { 'eslint', extra_on_attach = { formatting_keymap } },
   { 'svelte' },
+  { 'yamlls', extra_on_attach = { format_on_save } },
 }
 
 for _, lsp in ipairs(servers) do
