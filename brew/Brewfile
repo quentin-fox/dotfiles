@@ -1,42 +1,66 @@
 # vim: syntax=ruby filetype=ruby
-tap 'hashicorp/tap'
+
+# basic brew taps
+
 tap 'homebrew/bundle'
 tap 'homebrew/cask'
 tap 'homebrew/core'
 tap 'homebrew/services'
-tap 'stripe/stripe-cli'
-tap 'wix/brew'
-brew 'circleci'
-brew 'cloc'
-brew 'cocoapods'
-brew 'fd'
+
+# core
+
 brew 'fish'
-brew 'fzf'
-brew 'gh'
-brew 'golang-migrate'
-brew 'golangci-lint'
-brew 'jq'
+brew 'neovim'
+cask 'kitty'
+cask 'firefox'
+
+# containers
+
+brew 'docker'
 brew 'kubectx'
 brew 'kustomize'
-brew 'mkcert'
+
+# database
+
+brew 'redis'
+brew 'libpq'
+cask 'tableplus'
+
+# misc. cli tools
+
+brew 'cloc'
+brew 'fd'
+brew 'fzf'
+brew 'jq'
 brew 'mpv'
 brew 'mysql'
-brew 'neovim'
 brew 'nnn'
 brew 'pre-commit'
-brew 'redis'
-brew 'stow'
 brew 'the_silver_searcher'
 brew 'watchman'
 brew 'wget'
 brew 'yarn'
-brew 'hashicorp/tap/terraform'
-brew 'stripe/stripe-cli/stripe'
-brew 'wix/brew/applesimutils'
-brew 'libpq'
-cask 'tableplus'
-cask 'flipper'
-cask 'firefox'
+brew 'golang-migrate'
+brew 'golangci-lint'
+brew 'mkcert'
+brew 'stow'
+
+# vendor-specific tools
+
 cask 'google-cloud-sdk'
-cask 'kitty'
-cask 'ngrok'
+brew 'gh'
+brew 'circleci'
+
+tap 'hashicorp/tap'
+brew 'hashicorp/tap/terraform'
+
+tap 'stripe/stripe-cli'
+brew 'stripe/stripe-cli/stripe'
+
+tap 'wix/brew'
+brew 'wix/brew/applesimutils'
+
+# native development
+
+brew 'cocoapods'
+cask 'flipper'
