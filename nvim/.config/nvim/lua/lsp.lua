@@ -79,6 +79,7 @@ local servers = {
   { name = 'tsserver' },
   { name = 'eslint', extra_on_attach = { formatting_keymap } },
   { name = 'svelte' },
+  { name = 'terraformls' },
   { name = 'yamlls', extra_on_attach = { format_on_save }, settings = yamlls_settings },
 }
 
