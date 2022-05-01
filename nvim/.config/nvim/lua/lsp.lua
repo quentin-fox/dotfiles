@@ -64,18 +64,26 @@ local function format_on_save(client, bufnr)
   })
 end
 
+local yamlls_settings = {
+  yaml = {
+    schemas = {
+      ['https://json.schemastore.org/github-workflow.json'] = '/.github/workflows/*',
+      ['Kubernetes'] = '*.k8s.yml',
+    }
+  }
+}
+
 local servers = {
-  { 'gopls', extra_on_attach = { format_on_save } },
-  { 'golangci_lint_ls' },
-  { 'tsserver' },
-  { 'eslint', extra_on_attach = { formatting_keymap } },
-  { 'svelte' },
-  { 'yamlls', extra_on_attach = { format_on_save } },
+  { name = 'gopls', extra_on_attach = { format_on_save } },
+  { name = 'golangci_lint_ls' },
+  { name = 'tsserver' },
+  { name = 'eslint', extra_on_attach = { formatting_keymap } },
+  { name = 'svelte' },
+  { name = 'yamlls', extra_on_attach = { format_on_save }, settings = yamlls_settings },
 }
 
 for _, lsp in ipairs(servers) do
-  local name = lsp[1]
-  lspconfig[name].setup {
+  local settings = {
     on_attach = function(client, bufnr)
       on_attach(client, bufnr)
 
@@ -90,8 +98,17 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
-    }
+    },
   }
+
+  -- allow passing in any other config for a given ls
+  for key, value in pairs(lsp) do
+    if key ~= 'name' and key ~= 'extra_on_attach' then
+      settings[key] = value
+    end
+  end
+
+  lspconfig[lsp.name].setup(settings)
 end
 
 local luadev = require('lua-dev').setup {
