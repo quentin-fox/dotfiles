@@ -47,7 +47,7 @@ set -x PATH $ANDROID_HOME/emulator $PATH
 set -x PATH $ANDROID_HOME/tools $PATH
 set -x PATH $ANDROID_HOME/tools/bin $PATH
 set -x PATH $ANDROID_HOME/platform-tools $PATH
-set -x PATH /Applications/Postgres.app/Contents/Versions/latest/bin/ $PATH
+set -x PATH /opt/homebrew/opt/libpq/bin $PATH
 set -x PATH /usr/local/opt/zip/bin/ $PATH
 set -x PATH /Applications/kitty.app/Contents/MacOS/ $PATH
 set -x PATH ~/bin/ $PATH
