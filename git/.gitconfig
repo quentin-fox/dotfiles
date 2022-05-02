@@ -3,4 +3,11 @@ name = Quentin Fox
 email = quentinbennettfox@gmail.com
 
 [pull]
-ff = only
+	ff = only
+
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
