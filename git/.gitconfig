@@ -1,0 +1,6 @@
+[user]
+name = Quentin Fox
+email = quentinbennettfox@gmail.com
+
+[pull]
+ff = only
