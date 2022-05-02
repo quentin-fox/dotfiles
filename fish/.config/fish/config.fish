@@ -25,7 +25,6 @@ set -x EDITOR "$VISUAL"
 set -x NVIM_LISTEN_ADDRESS /tmp/nvim
 set -x FZF_DEFAULT_COMMAND "fd --hidden --type f --exclude '.git/' --strip-cwd-prefix"
 set -x ANDROID_HOME $HOME/Library/Android/sdk
-set -x SHELL /bin/zsh
 set -x __DEV__ "true"
 set -x CLOUDSDK_PYTHON python
 set -x CLOUDSDK_PYTHON_SITEPACKAGES 1
