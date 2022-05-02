@@ -25,6 +25,11 @@ brew 'kustomize'
 brew 'redis'
 brew 'libpq'
 
+# asdf node deps
+
+brew 'gpg'
+brew 'gawk'
+
 # misc. cli tools
 
 brew 'cloc'
