@@ -6,6 +6,14 @@ function error() { echo '\033[1;31mERROR: '"$1"'\033[0m'; }
 
 info 'Install starting, you may be prompted to enter your password for sudo privileges.'
 
+if [ -e fish/.config/fish/conf.d/secrets.fish ]
+then
+  info 'fish secret file detected'
+else
+  error 'Ensure the secrets.fish file has been copied to fish/.config/fish/conf.d/secrets.fish'
+  exit 1
+fi
+
 if [ -z $(xcode-select -p) ]
 then
   warn 'XCode not installed. Please install from Mac App store or Apple Developer Resources'
