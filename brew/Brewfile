@@ -24,7 +24,6 @@ brew 'kustomize'
 
 brew 'redis'
 brew 'libpq'
-cask 'tableplus'
 
 # misc. cli tools
 
@@ -64,3 +63,4 @@ brew 'wix/brew/applesimutils'
 
 brew 'cocoapods'
 cask 'flipper'
+
