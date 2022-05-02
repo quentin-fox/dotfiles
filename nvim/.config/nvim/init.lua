@@ -43,6 +43,10 @@ vim.opt.shiftwidth = 2
 vim.opt.wrapmargin = 0
 vim.opt.autoindent = true
 
+-- neovide
+
+vim.g.neovide_cursor_animation_length = 0
+
 -- diagnostic
 
 local min_severity = {
