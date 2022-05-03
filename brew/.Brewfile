@@ -55,9 +55,6 @@ cask 'google-cloud-sdk'
 brew 'gh'
 brew 'circleci'
 
-tap 'hashicorp/tap'
-brew 'hashicorp/tap/terraform'
-
 tap 'stripe/stripe-cli'
 brew 'stripe/stripe-cli/stripe'
 

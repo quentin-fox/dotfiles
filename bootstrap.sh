@@ -79,6 +79,7 @@ asdf plugin add ruby
 asdf plugin add python https://github.com/danhper/asdf-python.git
 asdf plugin add golang https://github.com/kennyp/asdf-golang.git
 asdf plugin add lua https://github.com/Stratus3D/asdf-lua.git
+asdf plugin-add terraform https://github.com/asdf-community/asdf-hashicorp.git
 
 info 'Installing global versions of asdf plugins'
 asdf install
@@ -88,3 +89,4 @@ asdf install
 go install github.com/quentin-fox/togglhours@latest
 go install github.com/quentin-fox/structinit@latest
 go install github.com/quentin-fox/gsel@latest
+
