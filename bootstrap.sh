@@ -82,3 +82,9 @@ asdf plugin add lua https://github.com/Stratus3D/asdf-lua.git
 
 info 'Installing global versions of asdf plugins'
 asdf install
+
+# custom tools
+
+go install github.com/quentin-fox/togglhours@latest
+go install github.com/quentin-fox/structinit@latest
+go install github.com/quentin-fox/gsel@latest
