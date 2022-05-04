@@ -76,6 +76,7 @@ local yamlls_settings = {
 local servers = {
   { name = 'gopls', extra_on_attach = { format_on_save } },
   { name = 'golangci_lint_ls' },
+  { name = 'jsonls', extra_on_attach = { formatting_keymap } },
   { name = 'tsserver' },
   { name = 'eslint', extra_on_attach = { formatting_keymap } },
   { name = 'svelte' },
