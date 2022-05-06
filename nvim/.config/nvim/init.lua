@@ -294,7 +294,7 @@ vim.keymap.set('n', 'M', 'gUl')
 
 -- replace current word in line
 
-vim.keymap.set('n', 'X', '<cmd>s/<C-r><C-w>//g<Left><Left>')
+vim.keymap.set('n', 'X', ':s/<C-r><C-w>//g<Left><Left>')
 
 -- clear highlight
 
