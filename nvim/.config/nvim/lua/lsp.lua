@@ -69,6 +69,9 @@ local yamlls_settings = {
     schemas = {
       ['https://json.schemastore.org/github-workflow.json'] = '/.github/workflows/*',
       ['Kubernetes'] = '*.k8s.yml',
+    },
+    format = {
+      singleQuote = true
     }
   }
 }
