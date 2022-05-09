@@ -14,6 +14,12 @@ else
   exit 1
 fi
 
+if [ -z $GITHUB_TOKEN ]
+then
+  error 'GITHUB_TOKEN environment variable not set'
+  exit 1
+fi
+
 if [ -z $(xcode-select -p) ]
 then
   warn 'XCode not installed. Please install from Mac App store or Apple Developer Resources'
@@ -91,3 +97,5 @@ go install github.com/quentin-fox/togglhours@latest
 go install github.com/quentin-fox/structinit@latest
 go install github.com/quentin-fox/gsel@latest
 
+# will be set in ~/.npmrc
+npm config set //npm.pkg.github.com/:_authToken $GITHUB_TOKEN
