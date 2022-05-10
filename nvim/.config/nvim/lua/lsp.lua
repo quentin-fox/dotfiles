@@ -82,7 +82,7 @@ local servers = {
   { name = 'jsonls', extra_on_attach = { formatting_keymap } },
   { name = 'tsserver' },
   { name = 'eslint', extra_on_attach = { formatting_keymap } },
-  { name = 'svelte' },
+  { name = 'svelte', extra_on_attach = { format_on_save } },
   { name = 'terraformls' },
   { name = 'yamlls', extra_on_attach = { format_on_save }, settings = yamlls_settings },
 }
