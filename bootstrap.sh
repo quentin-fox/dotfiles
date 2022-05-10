@@ -99,3 +99,7 @@ go install github.com/quentin-fox/gsel@latest
 
 # will be set in ~/.npmrc
 npm config set //npm.pkg.github.com/:_authToken $GITHUB_TOKEN
+
+# installer packer packages
+
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
