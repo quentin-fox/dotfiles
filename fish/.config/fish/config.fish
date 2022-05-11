@@ -52,6 +52,7 @@ set -x PATH /Applications/kitty.app/Contents/MacOS/ $PATH
 set -x PATH ~/bin/ $PATH
 set -x PATH /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin $PATH
 set -x PATH /opt/homebrew/bin $PATH
+set -x PATH ~/.rd/bin $PATH
 
 # }}}
 # {{{ aliases

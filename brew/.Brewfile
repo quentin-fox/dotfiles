@@ -16,8 +16,7 @@ cask 'firefox'
 
 # containers
 
-brew 'docker'
-brew 'kubectx'
+cask 'rancher'
 brew 'kustomize'
 
 # database
