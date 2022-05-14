@@ -59,6 +59,8 @@ require('packer').startup(function(use)
   -- themes
   use 'quentin-fox/onedark.vim'
 
+  use '~/nvimtitles'
+
   -- goes last
   if packer_bootstrap then
     require('packer').sync()
