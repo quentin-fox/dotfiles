@@ -7,13 +7,13 @@
 --   | || | | || || |_  _ | || |_| || (_| |
 --   |_||_| |_||_| \__|(_)|_| \__,_| \__,_|
 
--- {{{ modules
+--  modules
 
 require('plugin')
 require('lsp')
 
--- }}}
--- {{{ global options
+--
+--  global options
 
 vim.opt.hidden = false
 vim.opt.shell = '/opt/homebrew/bin/fish'
@@ -43,6 +43,17 @@ vim.opt.shiftwidth = 2
 vim.opt.wrapmargin = 0
 vim.opt.autoindent = true
 
+-- override $VIMRUNTIME/ftplugin/*.vim adding cro to the formatoptions opt
+
+vim.api.nvim_create_autocmd('Filetype', {
+  pattern = '*',
+  callback = function()
+    vim.opt.formatoptions:remove('r')
+    vim.opt.formatoptions:remove('o')
+    vim.opt.formatoptions:remove('c')
+  end
+})
+
 -- neovide
 
 vim.g.neovide_cursor_animation_length = 0
@@ -69,11 +80,22 @@ vim.diagnostic.config {
   },
 }
 
--- }}}
--- {{{ colorscheme
+--
+--  colorscheme
 
-vim.cmd('colorscheme onedark')
-vim.opt.background = 'dark'
+local colorscheme = 'onedark'
+local background = 'dark'
+
+if vim.env.THEME == 'light' then
+  colorscheme = 'one'
+  background = 'light'
+else
+  vim.highlight.create('Folded', { guifg = 'Gray', guibg = '#1c1c1c' })
+end
+
+
+vim.cmd('colorscheme ' .. colorscheme)
+vim.opt.background = background
 vim.opt.termguicolors = true
 
 local colors = {
@@ -109,13 +131,12 @@ vim.cmd([[sign define DiagnosticSignWarn text=? texthl=DiagnosticSignWarn linehl
 vim.cmd([[sign define DiagnosticSignInfo text=? texthl=DiagnosticSignInfo linehl= numhl=]])
 vim.cmd([[sign define DiagnosticSignInfo text=? texthl=DiagnosticSignHint linehl= numhl=]])
 
-vim.highlight.create('Folded', { guifg = 'Gray', guibg = '#1c1c1c' })
 vim.highlight.create('CursorLineNr', { guifg = 'Gray', guibg = 'NONE' })
 
 vim.highlight.link('VertSplit', 'Normal', true)
 
--- }}}
--- {{{ plugin setup
+--
+--  plugin setup
 
 require('colorizer').setup()
 
@@ -218,7 +239,7 @@ require('nnn').setup {
 require('telescope').setup {
   defaults = {
     layout_strategy = 'vertical',
-    layout_config = { height = 0.8 }
+    layout_config = { height = 0.8 },
   }
 }
 
@@ -242,8 +263,14 @@ require('dressing').setup {
   },
 }
 
--- }}}
--- {{{ basic keybindings
+require('octo').setup {
+  file_panel = {
+    use_icons = false
+  }
+}
+
+--
+--  basic keybindings
 
 -- system c&p
 vim.keymap.set('v', 'sy', '"+y')
@@ -304,8 +331,8 @@ vim.keymap.set('n', '-', '<cmd>nohlsearch<Cr>', { silent = true })
 
 vim.keymap.set('n', '<C-p>', '<C-i>')
 
--- }}}
--- {{{ plugin keybindings
+--
+--  plugin keybindings
 
 vim.keymap.set('n', '<Tab>', function()
   require('telescope.builtin').find_files({
@@ -336,4 +363,4 @@ vim.keymap.set('n', '~', '<cmd>Git<Cr>')
 vim.keymap.set('n', 'gn', '<cmd>NnnPicker<Cr>')
 vim.keymap.set('n', 'gm', '<cmd>NnnPicker %:p:h<Cr>')
 
--- }}}
+--
