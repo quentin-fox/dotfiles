@@ -76,13 +76,23 @@ local yamlls_settings = {
   }
 }
 
+local svelte_settings = {
+  svelte = {
+    plugin = {
+      css = {
+        globals = "src/styles/app.css"
+      }
+    }
+  }
+}
+
 local servers = {
   { name = 'gopls', extra_on_attach = { format_on_save } },
   { name = 'golangci_lint_ls' },
   { name = 'jsonls', extra_on_attach = { formatting_keymap } },
   { name = 'tsserver' },
   { name = 'eslint', extra_on_attach = { formatting_keymap } },
-  { name = 'svelte', extra_on_attach = { format_on_save } },
+  { name = 'svelte', extra_on_attach = { format_on_save }, settings = svelte_settings },
   { name = 'terraformls' },
   { name = 'yamlls', extra_on_attach = { format_on_save }, settings = yamlls_settings },
 }
