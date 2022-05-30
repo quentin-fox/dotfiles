@@ -1,7 +1,7 @@
 local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local packer_bootstrap
 
-local no_packer = vim.fn.empty(vim.fn.glob(install_path)) > 0
+local no_packer = vim.fn.empty(vim.fn.glob(install_path, nil, nil)) > 0
 if no_packer then
   local args = {
     'git',
@@ -58,7 +58,12 @@ require('packer').startup(function(use)
 
   -- themes
   use 'quentin-fox/onedark.vim'
+  use 'rakr/vim-one'
 
+  -- gh
+  use 'pwntester/octo.nvim'
+
+  -- development
   use '~/nvimtitles'
 
   -- goes last
