@@ -87,6 +87,8 @@ local svelte_settings = {
 }
 
 local servers = {
+  -- add root_dir override so that we don't enable deno ls on non-deno projects
+  { name = 'denols', root_dir = lspconfig.util.root_pattern({ 'deno.json' }) },
   { name = 'gopls', extra_on_attach = { format_on_save } },
   { name = 'golangci_lint_ls' },
   { name = 'jsonls', extra_on_attach = { formatting_keymap } },

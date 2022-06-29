@@ -135,6 +135,10 @@ vim.highlight.create('CursorLineNr', { guifg = 'Gray', guibg = 'NONE' })
 
 vim.highlight.link('VertSplit', 'Normal', true)
 
+vim.g.markdown_fenced_languages = {
+  "ts=typescript"
+}
+
 --
 --  plugin setup
 
