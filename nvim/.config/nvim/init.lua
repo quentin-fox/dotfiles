@@ -43,6 +43,10 @@ vim.opt.shiftwidth = 2
 vim.opt.wrapmargin = 0
 vim.opt.autoindent = true
 
+-- use filetype.lua
+
+vim.g.do_filetype_lua = 1
+
 -- override $VIMRUNTIME/ftplugin/*.vim adding cro to the formatoptions opt
 
 vim.api.nvim_create_autocmd('Filetype', {
@@ -160,6 +164,7 @@ require('nvim-treesitter.configs').setup {
     "javascript",
     "lua",
     "markdown",
+    "ruby",
     "scss",
     "svelte",
     "tsx",
