@@ -47,6 +47,7 @@ brew 'golang-migrate'
 brew 'golangci-lint'
 brew 'mkcert'
 brew 'stow'
+brew 'xcbeautify'
 
 # vendor-specific tools
 
