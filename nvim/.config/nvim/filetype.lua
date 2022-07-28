@@ -3,5 +3,6 @@ vim.filetype.add({
     ['Fastfile'] = 'ruby',
     ['Pluginfile'] = 'ruby',
     ['Appfile'] = 'ruby',
+    ['Podfile'] = 'ruby'
   }
 })
