@@ -48,12 +48,15 @@ brew 'golangci-lint'
 brew 'mkcert'
 brew 'stow'
 brew 'xcbeautify'
+brew 'sops'
+brew 'graphviz'
 
 # vendor-specific tools
 
 cask 'google-cloud-sdk'
 brew 'gh'
 brew 'circleci'
+brew 'firebase-cli'
 
 tap 'stripe/stripe-cli'
 brew 'stripe/stripe-cli/stripe'
@@ -65,4 +68,3 @@ brew 'wix/brew/applesimutils'
 
 brew 'cocoapods'
 cask 'flipper'
-
