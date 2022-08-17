@@ -56,6 +56,9 @@ require('packer').startup(function(use)
   use 'williamboman/nvim-lsp-installer'
   use 'stevearc/dressing.nvim'
 
+  -- compiler helpers
+  use 'neomake/neomake'
+
   -- themes
   use 'quentin-fox/onedark.vim'
   use 'rakr/vim-one'

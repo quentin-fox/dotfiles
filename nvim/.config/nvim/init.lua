@@ -16,7 +16,7 @@ require('lsp')
 --  global options
 
 vim.opt.hidden = false
-vim.opt.shell = '/opt/homebrew/bin/fish'
+-- vim.opt.shell = '/opt/homebrew/bin/fish'
 vim.opt.mouse = 'a'
 vim.opt.confirm = true
 vim.opt.termencoding = 'utf-8'
@@ -278,6 +278,9 @@ require('octo').setup {
   }
 }
 
+vim.g.neomake_open_list = 1
+vim.g.neomake_tsc_exe = vim.fn.getcwd() .. '/node_modules/.bin/tsc'
+
 --
 --  basic keybindings
 
@@ -372,4 +375,102 @@ vim.keymap.set('n', '~', '<cmd>Git<Cr>')
 vim.keymap.set('n', 'gn', '<cmd>NnnPicker<Cr>')
 vim.keymap.set('n', 'gm', '<cmd>NnnPicker %:p:h<Cr>')
 
---
+-- make pickers using neomake
+
+local pickers = require('telescope.pickers')
+local finders = require('telescope.finders')
+local conf = require('telescope.config').values
+local actions = require('telescope.actions')
+local action_state = require('telescope.actions.state')
+
+local maker_config = {
+  go = { function() return vim.api.nvim_call_function('neomake#makers#ft#go#go', {}) end },
+  golangci_lint = { function() return vim.api.nvim_call_function('neomake#makers#ft#go#golangci_lint', {}) end },
+  tsc = {
+    function() return vim.api.nvim_call_function('neomake#makers#ft#typescript#tsc', {}) end,
+    extra = {
+      exe = vim.fn.getcwd() .. '/node_modules/.bin/tsc'
+    }
+  }
+}
+
+local maker_ft_config = {
+  go = { go = maker_config.go, golangci_lint = maker_config.golangci_lint },
+  typescript = { tsc = maker_config.tsc },
+  typescriptreact = { tsc = maker_config.tsc },
+}
+
+local process_maker_config = function(config)
+  local get_config = config[1]
+  local neomake_config = get_config()
+
+  if config.extra then
+    for key, value in pairs(config.extra) do
+      neomake_config[key] = value
+    end
+  end
+
+  return neomake_config
+end
+
+local makers = function(opts)
+  opts = opts or {}
+
+  local ft = vim.opt.filetype:get()
+
+  local makers = maker_ft_config[ft]
+
+  if makers == nil then
+    vim.notify('No makers for filetype ' .. ft)
+    return
+  end
+
+  local maker_names = {}
+
+  for key, _ in pairs(makers) do
+    table.insert(maker_names, key)
+  end
+
+  pickers.new(opts, {
+    prompt_title = 'makers',
+    finder = finders.new_table {
+      results = maker_names
+    },
+    sorter = conf.generic_sorter(opts),
+    attach_mappings = function(prompt_bufnr, map)
+      actions.select_default:replace(function()
+        actions.close(prompt_bufnr)
+        local selection = action_state.get_selected_entry()
+
+        local maker_name = selection[1]
+
+        local maker_info = process_maker_config(maker_ft_config[ft][maker_name])
+
+        local makeexe = maker_info.exe or maker_name
+
+        local makeprg
+        if maker_info.args then
+          makeprg = makeexe .. ' ' .. table.concat(maker_info.args, ' ')
+        else
+          makeprg = makeexe
+        end
+
+        vim.bo.makeprg = makeprg
+        vim.bo.errorformat = maker_info.errorformat
+
+        vim.cmd('make')
+
+        local qfinfo = vim.fn.getqflist({ size = true })
+
+        if qfinfo.size > 0 then
+          vim.cmd('copen')
+        else
+          vim.notify('No errors found!')
+        end
+      end)
+      return true
+    end
+  }):find()
+end
+
+vim.keymap.set('n', '<leader>mk', makers, {})
