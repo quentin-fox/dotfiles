@@ -89,6 +89,7 @@ asdf plugin-add terraform https://github.com/asdf-community/asdf-hashicorp.git
 asdf plugin-add java https://github.com/halcyon/asdf-java.git
 asdf plugin-add deno https://github.com/asdf-community/asdf-deno.git
 asdf plugin add gcloud https://github.com/jthegedus/asdf-gcloud
+asdf plugin-add cue https://github.com/asdf-community/asdf-cue.git
 
 info 'Installing global versions of asdf plugins'
 asdf install
