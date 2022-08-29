@@ -50,6 +50,7 @@ brew 'stow'
 brew 'xcbeautify'
 brew 'sops'
 brew 'graphviz'
+brew 'dagger/tap/dagger'
 
 # vendor-specific tools
 
