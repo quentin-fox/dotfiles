@@ -87,6 +87,7 @@ vim.diagnostic.config {
 --
 --  colorscheme
 
+
 local colorscheme = 'onedark'
 local background = 'dark'
 
@@ -285,9 +286,12 @@ vim.g.neomake_tsc_exe = vim.fn.getcwd() .. '/node_modules/.bin/tsc'
 --  basic keybindings
 
 -- system c&p
+
 vim.keymap.set('v', 'sy', '"+y')
 vim.keymap.set('n', 'sy', '"+y')
 vim.keymap.set('n', 'sY', '"+yg_')
+
+vim.keymap.set('v', 'sp', '"+p')
 vim.keymap.set('n', 'sp', '"+p')
 vim.keymap.set('n', 'sP', '"+P')
 
@@ -304,7 +308,7 @@ vim.keymap.set('n', 'N', 'Nzz')
 
 -- gp to select what was last pasted
 
-vim.keymap.set('n', 'gp', '`v`')
+vim.keymap.set('n', 'gp', '`[v`]')
 
 -- simpler window navigation
 
