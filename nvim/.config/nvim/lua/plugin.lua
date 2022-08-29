@@ -44,6 +44,10 @@ require('packer').startup(function(use)
   }
   use 'nvim-treesitter/nvim-treesitter-textobjects'
 
+  -- filetypes
+
+  use 'jjo/vim-cue'
+
   -- statusline
   use 'nvim-lualine/lualine.nvim'
 
