@@ -99,6 +99,11 @@ _G.packer_plugins = {
     path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  neomake = {
+    loaded = true,
+    path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/neomake",
+    url = "https://github.com/neomake/neomake"
+  },
   ["nnn.vim"] = {
     loaded = true,
     path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/nnn.vim",
@@ -178,6 +183,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/vim-commentary",
     url = "https://github.com/tpope/vim-commentary"
+  },
+  ["vim-cue"] = {
+    loaded = true,
+    path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/vim-cue",
+    url = "https://github.com/jjo/vim-cue"
   },
   ["vim-fugitive"] = {
     loaded = true,

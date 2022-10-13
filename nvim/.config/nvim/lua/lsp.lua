@@ -68,7 +68,7 @@ local yamlls_settings = {
   yaml = {
     schemas = {
       ['https://json.schemastore.org/github-workflow.json'] = '/.github/workflows/*',
-      ['Kubernetes'] = '*.k8s.yml',
+      ['Kubernetes'] = '*.k8s.yaml',
     },
     format = {
       singleQuote = true
@@ -97,6 +97,7 @@ local servers = {
   { name = 'svelte', extra_on_attach = { format_on_save }, settings = svelte_settings },
   { name = 'solargraph' },
   { name = 'terraformls' },
+  { name = 'dagger' },
   { name = 'yamlls', extra_on_attach = { format_on_save }, settings = yamlls_settings },
 }
 
