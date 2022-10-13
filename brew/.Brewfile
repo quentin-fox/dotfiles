@@ -51,10 +51,17 @@ brew 'xcbeautify'
 brew 'sops'
 brew 'graphviz'
 brew 'dagger/tap/dagger'
+brew 'ansible'
+
+# kube
+
+brew 'kubectx'
+brew 'argocd'
+brew 'helm'
+brew 'kubeseal'
 
 # vendor-specific tools
 
-cask 'google-cloud-sdk'
 brew 'gh'
 brew 'circleci'
 brew 'firebase-cli'
