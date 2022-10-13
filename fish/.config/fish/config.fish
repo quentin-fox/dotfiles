@@ -116,7 +116,7 @@ if isatty # running in interactive terminal, not just process
 
 	# gcloud command line
 
-	source (brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc
+  source ~/.asdf/installs/gcloud/402.0.0/path.fish.inc
 
 end
 
