@@ -137,7 +137,7 @@ vim.cmd([[sign define DiagnosticSignInfo text=? texthl=DiagnosticSignInfo linehl
 vim.cmd([[sign define DiagnosticSignInfo text=? texthl=DiagnosticSignHint linehl= numhl=]])
 
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = 'Gray', bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'VertSplit', { link = 'Normal', default = true })
+vim.api.nvim_set_hl(0, 'VertSplit', { link = 'Normal', default = false })
 
 vim.g.markdown_fenced_languages = {
   "ts=typescript"
