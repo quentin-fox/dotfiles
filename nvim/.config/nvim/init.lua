@@ -95,7 +95,7 @@ if vim.env.THEME == 'light' then
   colorscheme = 'one'
   background = 'light'
 else
-  vim.highlight.create('Folded', { guifg = 'Gray', guibg = '#1c1c1c' })
+  vim.api.nvim_set_hl(0, 'Folded', { fg = 'Gray', bg = '#1c1c1c' })
 end
 
 
@@ -115,30 +115,29 @@ vim.opt.updatetime = 1500
 local group = vim.api.nvim_create_augroup('DiagnosticCursorHold', { clear = true })
 vim.api.nvim_create_autocmd('CursorHold', { callback = vim.diagnostic.open_float, group = group })
 
-vim.highlight.create('DiagnosticError', { guifg = colors.error }, false)
-vim.highlight.create('DiagnosticWarn', { guifg = colors.warn }, false)
-vim.highlight.create('DiagnosticInfo', { guifg = colors.info }, false)
-vim.highlight.create('DiagnosticHint', { guifg = colors.hint }, false)
+vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = colors.error, default = false })
+vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = colors.warn, default = false })
+vim.api.nvim_set_hl(0, 'DiagnosticInfo', { fg = colors.info, default = false })
+vim.api.nvim_set_hl(0, 'DiagnosticHint', { fg = colors.hint, default = false })
 
 -- no underlines desired
-vim.highlight.create('DiagnosticUnderlineError', { guifg = colors.error, gui = 'NONE' }, false)
-vim.highlight.create('DiagnosticUnderlineWarn', { guifg = colors.warn, gui = 'NONE' }, false)
-vim.highlight.create('DiagnosticUnderlineInfo', { guifg = colors.info, gui = 'NONE' }, false)
-vim.highlight.create('DiagnosticUnderlineHint', { guifg = colors.hint, gui = 'NONE' }, false)
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { fg = colors.error, underline = false, default = false })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { fg = colors.warn, underline = false, default = false })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { fg = colors.info, underline = false, default = false })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { fg = colors.hint, underline = false, default = false })
 
-vim.highlight.create('DiagnosticStatusError', { guifg = '#262626', guibg = colors.error }, false)
-vim.highlight.create('DiagnosticStatusWarn', { guifg = '#262626', guibg = colors.warn }, false)
-vim.highlight.create('DiagnosticStatusInfo', { guifg = '#262626', guibg = colors.info }, false)
-vim.highlight.create('DiagnosticStatusHint', { guifg = '#262626', guibg = colors.hint }, false)
+vim.api.nvim_set_hl(0, 'DiagnosticStatusError', { fg = '#262626', bg = colors.error, default = false })
+vim.api.nvim_set_hl(0, 'DiagnosticStatusWarn', { fg = '#262626', bg = colors.warn, default = false })
+vim.api.nvim_set_hl(0, 'DiagnosticStatusInfo', { fg = '#262626', bg = colors.info, default = false })
+vim.api.nvim_set_hl(0, 'DiagnosticStatusHint', { fg = '#262626', bg = colors.hint, default = false })
 
 vim.cmd([[sign define DiagnosticSignError text=> texthl=DiagnosticSignError linehl= numhl=]])
 vim.cmd([[sign define DiagnosticSignWarn text=? texthl=DiagnosticSignWarn linehl= numhl=]])
 vim.cmd([[sign define DiagnosticSignInfo text=? texthl=DiagnosticSignInfo linehl= numhl=]])
 vim.cmd([[sign define DiagnosticSignInfo text=? texthl=DiagnosticSignHint linehl= numhl=]])
 
-vim.highlight.create('CursorLineNr', { guifg = 'Gray', guibg = 'NONE' })
-
-vim.highlight.link('VertSplit', 'Normal', true)
+vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = 'Gray', bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'VertSplit', { link = 'Normal', default = true })
 
 vim.g.markdown_fenced_languages = {
   "ts=typescript"
