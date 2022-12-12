@@ -53,6 +53,9 @@ brew 'graphviz'
 brew 'dagger/tap/dagger'
 brew 'ansible'
 
+tap 'tinygo-org/tools'
+brew 'tinygo'
+
 # kube
 
 brew 'kubectx'

@@ -59,6 +59,7 @@ require('packer').startup(function(use)
   use 'L3MON4D3/LuaSnip'
   use 'williamboman/nvim-lsp-installer'
   use 'stevearc/dressing.nvim'
+  use 'simrat39/symbols-outline.nvim'
 
   -- compiler helpers
   use 'neomake/neomake'

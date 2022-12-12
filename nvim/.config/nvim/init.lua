@@ -278,6 +278,8 @@ require('octo').setup {
   }
 }
 
+require('symbols-outline').setup()
+
 vim.g.neomake_open_list = 1
 vim.g.neomake_tsc_exe = vim.fn.getcwd() .. '/node_modules/.bin/tsc'
 
