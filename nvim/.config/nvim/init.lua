@@ -234,23 +234,24 @@ require('lualine').setup {
   },
 }
 
-require('nnn').setup {
-  layout = {
-    window = { width = 0.9, height = 0.6, highlight = 'Debug' },
-  },
-  action = {
-    ['<C-t>'] = 'tab split',
-    ['<C-x>'] = 'split',
-    ['<C-v>'] = 'vsplit',
-  },
-}
-
 require('telescope').setup {
   defaults = {
     layout_strategy = 'vertical',
     layout_config = { height = 0.8 },
+    color_devicons = false
+  },
+  extensions = {
+    file_browser = {
+      hijack_netrw = true,
+      layout_strategy = 'vertical',
+      layout_config = { height = 0.8 },
+      disable_devicons = true,
+      hidden = true
+    }
   }
 }
+
+require('telescope').load_extension('file_browser')
 
 require('dressing').setup {
   input = {
@@ -377,8 +378,11 @@ end)
 
 vim.keymap.set('n', '~', '<cmd>Git<Cr>')
 
-vim.keymap.set('n', 'gn', '<cmd>NnnPicker<Cr>')
-vim.keymap.set('n', 'gm', '<cmd>NnnPicker %:p:h<Cr>')
+vim.keymap.set('n', 'gm', function() require('telescope').extensions.file_browser.file_browser {
+    path = ':p:h'
+  }
+end)
+vim.keymap.set('n', 'gm', function() require('telescope').extensions.file_browser.file_browser() end)
 
 -- make pickers using neomake
 

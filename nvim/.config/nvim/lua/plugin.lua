@@ -32,7 +32,7 @@ require('packer').startup(function(use)
   -- pickers
   use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope.nvim'
-  use 'mcchrish/nnn.vim'
+  use 'nvim-telescope/telescope-file-browser.nvim'
 
   -- lua dev
   use 'folke/lua-dev.nvim'
