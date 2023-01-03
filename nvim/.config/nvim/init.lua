@@ -382,7 +382,7 @@ vim.keymap.set('n', 'gm', function() require('telescope').extensions.file_browse
     path = ':p:h'
   }
 end)
-vim.keymap.set('n', 'gm', function() require('telescope').extensions.file_browser.file_browser() end)
+vim.keymap.set('n', 'gn', function() require('telescope').extensions.file_browser.file_browser() end)
 
 -- make pickers using neomake
 
