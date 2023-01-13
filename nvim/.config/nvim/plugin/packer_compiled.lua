@@ -104,11 +104,6 @@ _G.packer_plugins = {
     path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/neomake",
     url = "https://github.com/neomake/neomake"
   },
-  ["nnn.vim"] = {
-    loaded = true,
-    path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/nnn.vim",
-    url = "https://github.com/mcchrish/nnn.vim"
-  },
   ["nvim-autopairs"] = {
     loaded = true,
     path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
@@ -173,6 +168,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
+  },
+  ["symbols-outline.nvim"] = {
+    loaded = true,
+    path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim",
+    url = "https://github.com/simrat39/symbols-outline.nvim"
+  },
+  ["telescope-file-browser.nvim"] = {
+    loaded = true,
+    path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/telescope-file-browser.nvim",
+    url = "https://github.com/nvim-telescope/telescope-file-browser.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,

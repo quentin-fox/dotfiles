@@ -156,6 +156,7 @@ require('nvim-treesitter.configs').setup {
   ensure_installed = {
     "css",
     "fish",
+    "gleam",
     "go",
     "gomod",
     "hcl",
@@ -256,19 +257,23 @@ require('telescope').load_extension('file_browser')
 require('dressing').setup {
   input = {
     enabled = true,
-    winblend = 0,
     border = 'rounded',
-    winhighlight = 'NormalFloat:Normal',
-    insert_only = false
+    insert_only = false,
+    win_options = {
+      winblend = 0,
+      winhighlight = 'NormalFloat:Normal'
+    },
   },
   select = {
     enabled = true,
     backend = { 'telescope' },
     builtin = {
-      winblend = 0,
       border = 'rounded',
-      winhighlight = 'NormalFloat:Normal',
       relative = 'cursor',
+      win_options = {
+        winblend = 0,
+        winhighlight = 'NormalFloat:Normal'
+      },
     },
   },
 }
@@ -379,7 +384,7 @@ end)
 vim.keymap.set('n', '~', '<cmd>Git<Cr>')
 
 vim.keymap.set('n', 'gm', function() require('telescope').extensions.file_browser.file_browser {
-    path = ':p:h'
+    path = '%:p:h'
   }
 end)
 vim.keymap.set('n', 'gn', function() require('telescope').extensions.file_browser.file_browser() end)

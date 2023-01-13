@@ -27,8 +27,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+local capatabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require('nvim-lsp-installer').setup {
   automatic_installation = true,
@@ -89,6 +88,7 @@ local svelte_settings = {
 local servers = {
   -- add root_dir override so that we don't enable deno ls on non-deno projects
   { name = 'denols', root_dir = lspconfig.util.root_pattern({ 'deno.json' }) },
+  { name = 'gleam' },
   { name = 'gopls', extra_on_attach = { format_on_save } },
   { name = 'golangci_lint_ls' },
   { name = 'jsonls', extra_on_attach = { formatting_keymap } },
@@ -130,20 +130,19 @@ for _, lsp in ipairs(servers) do
   lspconfig[lsp.name].setup(settings)
 end
 
-local luadev = require('lua-dev').setup {
-  lspconfig = {
-    on_attach = function(client, bufnr)
-      on_attach(client, bufnr)
-      format_on_save(client, bufnr)
-    end,
-    capabilities = capabilities,
-    flags = {
-      debounce_text_changes = 150,
+require('neodev').setup {}
+
+
+
+lspconfig.sumneko_lua.setup {
+  settings = {
+    Lua = {
+      completion = {
+        callSnippet = "Replace"
+      }
     }
   }
 }
-
-lspconfig.sumneko_lua.setup(luadev)
 
 local luasnip = require('luasnip')
 local cmp = require('cmp')

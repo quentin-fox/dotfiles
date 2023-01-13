@@ -35,7 +35,7 @@ require('packer').startup(function(use)
   use 'nvim-telescope/telescope-file-browser.nvim'
 
   -- lua dev
-  use 'folke/lua-dev.nvim'
+  use 'folke/neodev.nvim'
 
   -- treesitter
   use {

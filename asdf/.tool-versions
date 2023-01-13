@@ -8,3 +8,5 @@ java zulu-11.58.15
 deno 1.23.1
 gcloud 402.0.0
 cue 0.4.3
+gleam 0.25.3
+erlang 25.2

@@ -90,6 +90,8 @@ asdf plugin-add java https://github.com/halcyon/asdf-java.git
 asdf plugin-add deno https://github.com/asdf-community/asdf-deno.git
 asdf plugin add gcloud https://github.com/jthegedus/asdf-gcloud
 asdf plugin-add cue https://github.com/asdf-community/asdf-cue.git
+asdf plugin-add gleam https://github.com/asdf-community/asdf-gleam.git
+asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
 
 info 'Installing global versions of asdf plugins'
 asdf install
