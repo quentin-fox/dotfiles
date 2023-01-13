@@ -61,9 +61,6 @@ require('packer').startup(function(use)
   use 'stevearc/dressing.nvim'
   use 'simrat39/symbols-outline.nvim'
 
-  -- compiler helpers
-  use 'neomake/neomake'
-
   -- themes
   use 'quentin-fox/onedark.vim'
   use 'rakr/vim-one'
