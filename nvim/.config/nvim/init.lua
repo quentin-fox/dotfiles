@@ -18,6 +18,7 @@ require('lsp')
 vim.opt.hidden = false
 -- vim.opt.shell = '/opt/homebrew/bin/fish'
 vim.opt.mouse = 'a'
+vim.opt.mousemodel = 'extend'
 vim.opt.confirm = true
 vim.opt.termencoding = 'utf-8'
 vim.opt.encoding = 'utf-8'
@@ -139,6 +140,9 @@ vim.cmd([[sign define DiagnosticSignInfo text=? texthl=DiagnosticSignHint linehl
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = 'Gray', bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'VertSplit', { link = 'Normal', default = false })
 
+-- due to treesitter change, that highlights it as an Identifier
+vim.api.nvim_set_hl(0, '@variable', { link = 'Normal' })
+
 vim.g.markdown_fenced_languages = {
   "ts=typescript"
 }
@@ -168,6 +172,7 @@ require('nvim-treesitter.configs').setup {
     "ruby",
     "scss",
     "svelte",
+    "terraform",
     "tsx",
     "typescript",
     "yaml",
