@@ -33,6 +33,8 @@ require('nvim-lsp-installer').setup {
   automatic_installation = true,
 }
 
+require('neodev').setup {}
+
 local lspconfig = require('lspconfig')
 
 local function formatting_keymap(client, bufnr)
@@ -115,7 +117,6 @@ for _, lsp in ipairs(servers) do
         cb(client, bufnr)
       end
     end,
-    capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
     },
@@ -130,8 +131,6 @@ for _, lsp in ipairs(servers) do
 
   lspconfig[lsp.name].setup(settings)
 end
-
-require('neodev').setup {}
 
 local luasnip = require('luasnip')
 local cmp = require('cmp')
