@@ -156,6 +156,9 @@ require('nvim-autopairs').setup {
   check_ts = true,
 }
 
+-- put gcc-12 (from brew) first so that brew gcc is used for compiling norg instead of system cc
+require('nvim-treesitter.install').compilers = { 'gcc-12', 'gcc', 'cc', 'clang', 'cl', 'zig' }
+
 require('nvim-treesitter.configs').setup {
   ensure_installed = {
     "css",
@@ -169,8 +172,10 @@ require('nvim-treesitter.configs').setup {
     "javascript",
     "lua",
     "markdown",
+    "norg",
     "ruby",
     "scss",
+    "sql",
     "svelte",
     "terraform",
     "tsx",
@@ -290,6 +295,17 @@ require('octo').setup {
 }
 
 require('symbols-outline').setup()
+
+require('neorg').setup {
+  load = {
+    ['core.defaults'] = {},
+    ['core.norg.completion'] = {
+      config = {
+        engine = 'nvim-cmp'
+      }
+    }
+  }
+}
 
 --
 --  basic keybindings

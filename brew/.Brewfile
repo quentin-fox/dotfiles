@@ -28,6 +28,7 @@ brew 'libpq'
 
 brew 'gpg'
 brew 'gawk'
+brew 'gcc'
 
 # misc. cli tools
 

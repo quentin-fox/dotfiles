@@ -44,6 +44,11 @@ require('packer').startup(function(use)
   }
   use 'nvim-treesitter/nvim-treesitter-textobjects'
 
+  use {
+    'nvim-neorg/neorg',
+    run = ':Neorg sync-parsers'
+  }
+
   -- filetypes
 
   use 'jjo/vim-cue'

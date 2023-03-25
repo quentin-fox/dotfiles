@@ -92,6 +92,7 @@ local servers = {
   { name = 'gopls', extra_on_attach = { format_on_save } },
   { name = 'golangci_lint_ls' },
   { name = 'jsonls', extra_on_attach = { formatting_keymap } },
+  { name = 'lua_ls' },
   { name = 'tsserver' },
   { name = 'eslint', extra_on_attach = { formatting_keymap }, filetypes = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte' } },
   { name = 'svelte', extra_on_attach = { format_on_save }, settings = svelte_settings },
@@ -132,18 +133,6 @@ end
 
 require('neodev').setup {}
 
-
-
-lspconfig.sumneko_lua.setup {
-  settings = {
-    Lua = {
-      completion = {
-        callSnippet = "Replace"
-      }
-    }
-  }
-}
-
 local luasnip = require('luasnip')
 local cmp = require('cmp')
 
@@ -180,5 +169,6 @@ cmp.setup {
   }),
   sources = {
     { name = 'nvim_lsp' },
+    { name = 'neorg' },
   },
 }
