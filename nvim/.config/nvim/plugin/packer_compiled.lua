@@ -104,6 +104,11 @@ _G.packer_plugins = {
     path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/neodev.nvim",
     url = "https://github.com/folke/neodev.nvim"
   },
+  neorg = {
+    loaded = true,
+    path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/neorg",
+    url = "https://github.com/nvim-neorg/neorg"
+  },
   ["nvim-autopairs"] = {
     loaded = true,
     path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/nvim-autopairs",

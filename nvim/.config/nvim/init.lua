@@ -303,6 +303,28 @@ require('neorg').setup {
       config = {
         engine = 'nvim-cmp'
       }
+    },
+    ['core.norg.dirman'] = {
+      config = {
+        workspaces = {
+          opensports = '~/opensports/minutes'
+        }
+      }
+    },
+    ['core.norg.esupports.metagen'] = {
+      config = {
+        type = 'empty',
+        template = {
+          { "title", "" },
+        }
+      }
+    },
+    ['core.norg.journal'] = {
+      config = {
+        journal_folder = 'notes',
+        strategy = 'flat',
+        workspace = 'opensports',
+      }
     }
   }
 }
