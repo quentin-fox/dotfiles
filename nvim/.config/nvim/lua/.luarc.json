@@ -1,0 +1,29 @@
+{
+    "workspace.library": [
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/neodev.nvim/types/stable",
+        "/opt/homebrew/Cellar/neovim/0.8.3/share/nvim/runtime/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/cmp_luasnip/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/dressing.nvim/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/lualine.nvim/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/LuaSnip/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/neodev.nvim/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/neorg/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/nvim-autopairs/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/nvim-cmp/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/nvim-lspconfig/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/nvim-treesitter/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/nvim-treesitter-textobjects/lua",
+        "/Users/quentin/nvimtitles/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/octo.nvim/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/packer.nvim/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/plenary.nvim/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/telescope-file-browser.nvim/lua",
+        "/Users/quentin/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua",
+        "/Users/quentin/dotfiles/nvim/.config/nvim/lua",
+        "${3rd}/luv/library"
+    ]
+}
