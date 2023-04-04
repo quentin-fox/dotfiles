@@ -10,3 +10,4 @@ gcloud 402.0.0
 cue 0.4.3
 gleam 0.25.3
 erlang 25.2
+haskell 9.6.1

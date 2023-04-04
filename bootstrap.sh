@@ -92,6 +92,7 @@ asdf plugin add gcloud https://github.com/jthegedus/asdf-gcloud
 asdf plugin-add cue https://github.com/asdf-community/asdf-cue.git
 asdf plugin-add gleam https://github.com/asdf-community/asdf-gleam.git
 asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
+asdf plugin-add haskell https://github.com/vic/asdf-haskell.git
 
 info 'Installing global versions of asdf plugins'
 asdf install
