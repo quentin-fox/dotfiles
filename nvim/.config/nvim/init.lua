@@ -166,6 +166,7 @@ require('nvim-treesitter.configs').setup {
     "gleam",
     "go",
     "gomod",
+    "haskell",
     "hcl",
     "html",
     "java",
