@@ -34,6 +34,10 @@ vim.opt.pumheight = 5
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = 'number'
 
+-- saves files in $XDG_STATE_HOME/nvim/undo//
+-- so doesn't clog up the project directory with undo files
+vim.opt.undofile = true
+
 -- default indentation
 
 vim.opt.list = true
