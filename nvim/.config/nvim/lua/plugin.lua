@@ -44,15 +44,6 @@ require('packer').startup(function(use)
   }
   use 'nvim-treesitter/nvim-treesitter-textobjects'
 
-  use {
-    'nvim-neorg/neorg',
-    run = ':Neorg sync-parsers'
-  }
-
-  -- filetypes
-
-  use 'jjo/vim-cue'
-
   -- statusline
   use 'nvim-lualine/lualine.nvim'
 
@@ -64,7 +55,6 @@ require('packer').startup(function(use)
   use 'L3MON4D3/LuaSnip'
   use 'williamboman/nvim-lsp-installer'
   use 'stevearc/dressing.nvim'
-  use 'simrat39/symbols-outline.nvim'
 
   -- themes
   use 'quentin-fox/onedark.vim'
