@@ -52,6 +52,11 @@ vim.opt.autoindent = true
 
 vim.g.do_filetype_lua = 1
 
+-- netrw disabled for nvim-tree
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- override $VIMRUNTIME/ftplugin/*.vim adding cro to the formatoptions opt
 
 vim.api.nvim_create_autocmd('Filetype', {
@@ -251,19 +256,35 @@ require('telescope').setup {
     layout_strategy = 'vertical',
     layout_config = { height = 0.8 },
     color_devicons = false
-  },
-  extensions = {
-    file_browser = {
-      hijack_netrw = true,
-      layout_strategy = 'vertical',
-      layout_config = { height = 0.8 },
-      disable_devicons = true,
-      hidden = true
-    }
   }
 }
 
-require('telescope').load_extension('file_browser')
+require('nvim-tree').setup {
+  modified = {
+    enable = true,
+  },
+  renderer = {
+    icons = {
+      show = {
+        file = false,
+        folder = false,
+        folder_arrow = false,
+        git = false,
+        modified = true,
+      },
+      modified_placement = 'before',
+      glyphs = {
+        modified = 'M'
+      }
+    },
+    indent_markers = {
+      enable = true
+    },
+    special_files = {}
+  },
+}
+
+require("lsp-file-operations").setup()
 
 require('dressing').setup {
   input = {
@@ -388,8 +409,12 @@ end)
 
 vim.keymap.set('n', '~', '<cmd>Git<Cr>')
 
-vim.keymap.set('n', 'gm', function() require('telescope').extensions.file_browser.file_browser {
-    path = '%:p:h'
-  }
+vim.keymap.set('n', 'gm', function()
+  require('nvim-tree.api').tree.open({
+    path = vim.fn.expand('%:p:h'),
+    find_file = true,
+    update_root = true
+  })
 end)
-vim.keymap.set('n', 'gn', function() require('telescope').extensions.file_browser.file_browser() end)
+
+vim.keymap.set('n', 'gn', require('nvim-tree.api').tree.open)

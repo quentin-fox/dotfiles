@@ -33,6 +33,7 @@ require('packer').startup(function(use)
   use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope.nvim'
   use 'nvim-telescope/telescope-file-browser.nvim'
+  use 'nvim-tree/nvim-tree.lua'
 
   -- lua dev
   use 'folke/neodev.nvim'
@@ -55,6 +56,7 @@ require('packer').startup(function(use)
   use 'L3MON4D3/LuaSnip'
   use 'williamboman/nvim-lsp-installer'
   use 'stevearc/dressing.nvim'
+  use 'antosha417/nvim-lsp-file-operations'
 
   -- themes
   use 'quentin-fox/onedark.vim'
