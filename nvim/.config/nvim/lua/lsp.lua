@@ -27,7 +27,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local capatabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require('nvim-lsp-installer').setup {
   automatic_installation = true,
@@ -89,6 +89,7 @@ local svelte_settings = {
 
 local servers = {
   -- add root_dir override so that we don't enable deno ls on non-deno projects
+  { name = 'cssls' },
   { name = 'denols', root_dir = lspconfig.util.root_pattern({ 'deno.json' }) },
   { name = 'gleam' },
   { name = 'gopls', extra_on_attach = { format_on_save } },
@@ -121,6 +122,8 @@ for _, lsp in ipairs(servers) do
       debounce_text_changes = 150,
     },
   }
+
+  settings['capabilities'] = capabilities
 
   -- allow passing in any other config for a given ls
   for key, value in pairs(lsp) do
