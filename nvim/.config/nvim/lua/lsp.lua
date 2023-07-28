@@ -29,8 +29,9 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-require('nvim-lsp-installer').setup {
-  automatic_installation = true,
+require('mason').setup {}
+require('mason-lspconfig').setup {
+  automatic_installation = true
 }
 
 require('neodev').setup {}
