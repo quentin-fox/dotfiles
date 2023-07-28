@@ -108,7 +108,7 @@ local servers = {
   { name = 'lua_ls' },
   { name = 'tsserver', single_file_support = false, root_dir = lspconfig.util.root_pattern({ 'package.json' }), extra_on_attach = { disable_implementation_provider } },
   { name = 'eslint', extra_on_attach = { formatting_keymap }, filetypes = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte' } },
-  { name = 'svelte', extra_on_attach = { format_on_save }, settings = svelte_settings },
+  { name = 'svelte', extra_on_attach = { formatting_keymap }, settings = svelte_settings },
   { name = 'solargraph' },
   { name = 'terraformls' },
   { name = 'dagger' },
