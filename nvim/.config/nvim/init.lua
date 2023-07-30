@@ -447,4 +447,5 @@ end
 
 _G.fuzzy_search_operator = fuzzy_search_operator
 
-vim.keymap.set('n', 'gs', fuzzy_search_operator, { expr = true })
+-- gt = go telescope
+vim.keymap.set('n', 'gt', fuzzy_search_operator, { expr = true })
