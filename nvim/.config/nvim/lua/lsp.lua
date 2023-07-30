@@ -153,7 +153,7 @@ local svelte_settings = {
 local servers = {
   -- add root_dir override so that we don't enable deno ls on non-deno projects
   { name = 'cssls' },
-  { name = 'cssmodules_ls', extra_on_attach = { with_definition('gs'), with_references('gs'), with_hover('gsK') }},
+  { name = 'cssmodules_ls', extra_on_attach = { with_definition('gs'), with_hover('gsK') }},
   { name = 'denols', root_dir = lspconfig.util.root_pattern({ 'deno.json' }) },
   { name = 'gopls', extra_on_attach = vim.list_extend({ format_on_save }, with_default()) },
   { name = 'golangci_lint_ls', extra_on_attach = {} },
