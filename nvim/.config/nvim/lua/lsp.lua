@@ -88,25 +88,23 @@ local svelte_settings = {
   }
 }
 
-local function disable_definition_provider(client)
-  client.server_capabilities.definitionProvider = false
-end
-
-local function disable_implementation_provider(client)
+local function disable_cssmodules_providers(client)
   client.server_capabilities.implementationProvider = false
+  client.server_capabilities.definitionProvider = false
+  client.server_capabilities.hoverProvider = false
 end
 
 local servers = {
   -- add root_dir override so that we don't enable deno ls on non-deno projects
   { name = 'cssls' },
-  { name = 'cssmodules_ls', extra_on_attach = { disable_definition_provider }},
+  { name = 'cssmodules_ls', extra_on_attach = { disable_cssmodules_provider }},
   { name = 'denols', root_dir = lspconfig.util.root_pattern({ 'deno.json' }) },
   { name = 'gleam' },
   { name = 'gopls', extra_on_attach = { format_on_save } },
   { name = 'golangci_lint_ls' },
   { name = 'jsonls', extra_on_attach = { formatting_keymap } },
   { name = 'lua_ls' },
-  { name = 'tsserver', single_file_support = false, root_dir = lspconfig.util.root_pattern({ 'package.json' }), extra_on_attach = { disable_implementation_provider } },
+  { name = 'tsserver', single_file_support = false, root_dir = lspconfig.util.root_pattern({ 'package.json' }) },
   { name = 'eslint', extra_on_attach = { formatting_keymap }, filetypes = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte' } },
   { name = 'svelte', extra_on_attach = { formatting_keymap }, settings = svelte_settings },
   { name = 'solargraph' },
