@@ -26,14 +26,12 @@ require('packer').startup(function(use)
   use 'tpope/vim-unimpaired'
   use 'tpope/vim-rhubarb'
   use 'windwp/nvim-autopairs'
-  use 'mtikekar/nvim-send-to-term'
   use 'norcalli/nvim-colorizer.lua'
+  use 'nvim-tree/nvim-tree.lua'
 
   -- pickers
   use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope.nvim'
-  use 'nvim-telescope/telescope-file-browser.nvim'
-  use 'nvim-tree/nvim-tree.lua'
 
   -- lua dev
   use 'folke/neodev.nvim'
@@ -65,9 +63,6 @@ require('packer').startup(function(use)
 
   -- gh
   use 'pwntester/octo.nvim'
-
-  -- development
-  use '~/nvimtitles'
 
   -- goes last
   if packer_bootstrap then
