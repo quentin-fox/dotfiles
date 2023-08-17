@@ -53,6 +53,8 @@ brew 'sops'
 brew 'graphviz'
 brew 'dagger/tap/dagger'
 brew 'ansible'
+brew 'terraform'
+brew 'terraform-ls'
 
 tap 'tinygo-org/tools'
 brew 'tinygo'
