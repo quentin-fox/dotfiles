@@ -150,8 +150,8 @@ vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = 'Gray', bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'VertSplit', { link = 'Normal', default = false })
 
 -- due to treesitter change, that highlights it as an Identifier
-vim.api.nvim_set_hl(0, '@variable', { link = 'Normal' })
-vim.api.nvim_set_hl(0, 'Tag', { link = 'Identifier' })
+-- vim.api.nvim_set_hl(0, '@variable', { link = 'Normal' })
+-- vim.api.nvim_set_hl(0, 'Tag', { link = 'Identifier' })
 
 vim.g.markdown_fenced_languages = {
   "ts=typescript"
@@ -210,7 +210,7 @@ require('nvim-treesitter.configs').setup {
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = '<CR>',
+      init_selection = 'gs',
       scope_incremental = '<CR>',
       node_incremental = '<TAB>',
       node_decremental = '<S-TAB>',
