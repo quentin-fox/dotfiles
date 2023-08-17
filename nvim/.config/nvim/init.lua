@@ -151,6 +151,7 @@ vim.api.nvim_set_hl(0, 'VertSplit', { link = 'Normal', default = false })
 
 -- due to treesitter change, that highlights it as an Identifier
 vim.api.nvim_set_hl(0, '@variable', { link = 'Normal' })
+vim.api.nvim_set_hl(0, 'Tag', { link = 'Identifier' })
 
 vim.g.markdown_fenced_languages = {
   "ts=typescript"
@@ -203,6 +204,16 @@ require('nvim-treesitter.configs').setup {
         ["ac"] = "@class.outer",
         ["ic"] = "@class.inner",
       },
+    },
+  },
+
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = '<CR>',
+      scope_incremental = '<CR>',
+      node_incremental = '<TAB>',
+      node_decremental = '<S-TAB>',
     },
   },
 }
@@ -310,11 +321,11 @@ require('dressing').setup {
   },
 }
 
-require('octo').setup {
-  file_panel = {
-    use_icons = false
-  }
-}
+-- require('octo').setup {
+--   file_panel = {
+--     use_icons = false
+--   }
+-- }
 
 --  basic keybindings
 
