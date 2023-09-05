@@ -121,7 +121,6 @@ local colors = {
 }
 
 -- open hover window after updatetime without cursor moving
-vim.opt.updatetime = 1500
 local group = vim.api.nvim_create_augroup('DiagnosticCursorHold', { clear = true })
 vim.api.nvim_create_autocmd('CursorHold', { callback = vim.diagnostic.open_float, group = group })
 
