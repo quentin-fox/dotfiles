@@ -23,6 +23,7 @@ brew 'kustomize'
 
 brew 'redis'
 brew 'libpq'
+brew 'duckdb'
 
 # asdf node deps
 
@@ -55,6 +56,10 @@ brew 'dagger/tap/dagger'
 brew 'ansible'
 brew 'terraform'
 brew 'terraform-ls'
+brew 'lua-language-server'
+brew 'caddy'
+brew 'ansifilter'
+brew 'yaml-language-server'
 
 tap 'tinygo-org/tools'
 brew 'tinygo'
