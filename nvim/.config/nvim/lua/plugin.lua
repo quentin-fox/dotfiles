@@ -62,7 +62,7 @@ require('packer').startup(function(use)
   use 'rakr/vim-one'
 
   -- gh
-  use 'pwntester/octo.nvim'
+  -- use 'pwntester/octo.nvim'
 
   -- goes last
   if packer_bootstrap then

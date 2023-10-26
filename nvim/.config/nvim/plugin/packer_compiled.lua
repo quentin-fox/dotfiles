@@ -99,15 +99,20 @@ _G.packer_plugins = {
     path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["mason-lspconfig.nvim"] = {
+    loaded = true,
+    path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+    url = "https://github.com/williamboman/mason-lspconfig.nvim"
+  },
+  ["mason.nvim"] = {
+    loaded = true,
+    path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    url = "https://github.com/williamboman/mason.nvim"
+  },
   ["neodev.nvim"] = {
     loaded = true,
     path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/neodev.nvim",
     url = "https://github.com/folke/neodev.nvim"
-  },
-  neorg = {
-    loaded = true,
-    path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/neorg",
-    url = "https://github.com/nvim-neorg/neorg"
   },
   ["nvim-autopairs"] = {
     loaded = true,
@@ -124,20 +129,20 @@ _G.packer_plugins = {
     path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
     url = "https://github.com/norcalli/nvim-colorizer.lua"
   },
-  ["nvim-lsp-installer"] = {
+  ["nvim-lsp-file-operations"] = {
     loaded = true,
-    path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer",
-    url = "https://github.com/williamboman/nvim-lsp-installer"
+    path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/nvim-lsp-file-operations",
+    url = "https://github.com/antosha417/nvim-lsp-file-operations"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
-  ["nvim-send-to-term"] = {
+  ["nvim-tree.lua"] = {
     loaded = true,
-    path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/nvim-send-to-term",
-    url = "https://github.com/mtikekar/nvim-send-to-term"
+    path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+    url = "https://github.com/nvim-tree/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
     loaded = true,
@@ -148,16 +153,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/nvim-treesitter-textobjects",
     url = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
-  },
-  nvimtitles = {
-    loaded = true,
-    path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/nvimtitles",
-    url = "/Users/quentin/nvimtitles"
-  },
-  ["octo.nvim"] = {
-    loaded = true,
-    path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/octo.nvim",
-    url = "https://github.com/pwntester/octo.nvim"
   },
   ["onedark.vim"] = {
     loaded = true,
@@ -174,16 +169,6 @@ _G.packer_plugins = {
     path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  ["symbols-outline.nvim"] = {
-    loaded = true,
-    path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim",
-    url = "https://github.com/simrat39/symbols-outline.nvim"
-  },
-  ["telescope-file-browser.nvim"] = {
-    loaded = true,
-    path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/telescope-file-browser.nvim",
-    url = "https://github.com/nvim-telescope/telescope-file-browser.nvim"
-  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -193,11 +178,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/vim-commentary",
     url = "https://github.com/tpope/vim-commentary"
-  },
-  ["vim-cue"] = {
-    loaded = true,
-    path = "/Users/quentin/.local/share/nvim/site/pack/packer/start/vim-cue",
-    url = "https://github.com/jjo/vim-cue"
   },
   ["vim-fugitive"] = {
     loaded = true,
