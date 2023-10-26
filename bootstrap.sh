@@ -20,21 +20,21 @@ then
   exit 1
 fi
 
-if [ -z $(xcode-select -p) ]
+
+if xcode-select --install
 then
-  warn 'XCode not installed. Please install from Mac App store or Apple Developer Resources'
-  warn 'https://developer.apple.com/xcode/resources/'
+  info 'wait for command line utilities to finish installing'
   exit 1
 fi
-
-info 'XCode installation detected'
 
 # install homebrew
 
 if [ -z $(which brew) ]
 then
   info 'Installing brew...'
-  curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  error "follow instructions for adding brew to path before continuing"
+  exit 1
 else
   info 'Brew already installed!'
 fi
@@ -64,6 +64,7 @@ stow -S "${STOW_DIRS[@]}"
 if [ $SHELL != $(which fish) ]
 then
   info 'Changing shell to fish'
+  echo $(which fish) | sudo tee -a /etc/shells
   chsh -s $(which fish)
 fi
 
@@ -73,6 +74,7 @@ then
 else
   info 'Installing asdf'
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
+  source ~/.asdf
 fi
 
 info 'Adding asdf plugins'

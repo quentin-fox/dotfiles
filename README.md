@@ -4,11 +4,25 @@ Uses `stow` (installable with `brew install stow`) to manage symlinks to dotfile
 
 # Bootstrapping System
 
+Install git with `xcode-select --install`
+
+then:
+
+`git clone https://github.com/quentin-fox/dotfiles`
+
+Get the github token in clipboard, then
+
+`export GITHUB_TOKEN=$(pbpaste)`
+
+Then
+
+`sh bootstrap.sh`
+
 Get the `secrets.fish` file (not stored in git), and copy to `fish/.config/fish/conf.d/`
 
 ```sh
 mkdir fish/.config/fish/conf.d
-cp path/to/secrets.fish fisih/.config/fish/conf.d/secrets.fish
+cp path/to/secrets.fish fish/.config/fish/conf.d/secrets.fish
 ```
 
 Ensure that the `secrets.fish` file has the `GITHUB_TOKEN` variable defined.
