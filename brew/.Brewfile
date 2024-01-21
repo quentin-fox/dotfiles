@@ -61,6 +61,8 @@ brew 'caddy'
 brew 'ansifilter'
 brew 'yaml-language-server'
 
+brew 'jesseduffield/lazygit/lazygit'
+
 tap 'tinygo-org/tools'
 brew 'tinygo'
 
