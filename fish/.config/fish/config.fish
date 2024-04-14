@@ -55,6 +55,11 @@ set -x PATH /opt/homebrew/bin $PATH
 set -x PATH ~/.rd/bin $PATH
 
 # }}}
+# {{{ dynamic env vars
+
+set -x GITHUB_PACKAGE_TOKEN (gh auth token)
+
+# }}}
 # {{{ aliases
 
 # -e option makes opening with enter use $EDITOR
@@ -63,11 +68,8 @@ alias nnn='nnn -e'
 # }}}
 # {{{ abbreviations 
 
-abbr nf 'nvim (fzf)'
 abbr gpo 'git push -u origin (git branch --show-current)'
 abbr glog 'git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
-abbr gmi 'go mod init github.com/quentin-fox/(basename (pwd))'
-abbr wthr 'weather -c Toronto -C Canada'
 abbr mins 'nvim ~/opensports/minutes/(date "+%F").md'
 
 # }}}
@@ -116,7 +118,7 @@ if isatty # running in interactive terminal, not just process
 
 	# gcloud command line
 
-  source ~/.asdf/installs/gcloud/402.0.0/path.fish.inc
+  source ~/.asdf/installs/gcloud/471.0.0/path.fish.inc
 
 end
 

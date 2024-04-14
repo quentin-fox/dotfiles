@@ -6,3 +6,7 @@ vim.filetype.add({
     ['Podfile'] = 'ruby'
   }
 })
+
+vim.filetype.add({
+  extension = { templ = 'templ' }
+})

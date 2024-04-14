@@ -1,12 +1,12 @@
 nodejs 20.5.1
 python 3.9.5
-golang 1.18.1
+golang 1.21.4
 ruby 3.0.1
 lua 5.1
 java zulu-11.58.15
-deno 1.32.5
-gcloud 402.0.0
+deno 1.40.4
+gcloud 471.0.0
 cue 0.4.3
-gleam 0.28.0
-erlang 25.2
+gleam 1.0.0
 haskell 9.4.4
+rust 1.75.0

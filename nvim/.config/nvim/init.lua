@@ -177,12 +177,13 @@ require('nvim-treesitter.configs').setup {
     "html",
     "java",
     "javascript",
+    "json",
     "lua",
     "markdown",
     "ruby",
     "scss",
-    "sql",
     "svelte",
+    "templ",
     "terraform",
     "tsx",
     "typescript",
@@ -216,6 +217,10 @@ require('nvim-treesitter.configs').setup {
     },
   },
 }
+
+vim.cmd([[set foldmethod=expr]])
+vim.cmd([[set foldexpr=nvim_treesitter#foldexpr()]])
+vim.cmd([[set nofoldenable]])
 
 require('lualine').setup {
   options = {
@@ -420,14 +425,19 @@ end)
 vim.keymap.set('n', '~', '<cmd>Git<Cr>')
 
 vim.keymap.set('n', 'gm', function()
-  require('nvim-tree.api').tree.open({
+  require('nvim-tree.api').tree.toggle({
     path = vim.fn.expand('%:p:h'),
     find_file = true,
     update_root = true
   })
 end)
 
-vim.keymap.set('n', 'gn', require('nvim-tree.api').tree.open)
+vim.keymap.set('n', 'gn', function()
+  require('nvim-tree.api').tree.toggle({
+    path = vim.fn.getcwd(),
+    update_root = true
+  })
+end)
 
 -- telescope fuzzy search operator
 
