@@ -61,6 +61,10 @@ require('packer').startup(function(use)
   use 'quentin-fox/onedark.vim'
   use 'rakr/vim-one'
 
+  -- ai
+
+  use 'Exafunction/codeium.vim'
+
   -- gh
   -- use 'pwntester/octo.nvim'
 

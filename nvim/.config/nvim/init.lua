@@ -7,6 +7,11 @@
 --   | || | | || || |_  _ | || |_| || (_| |
 --   |_||_| |_||_| \__|(_)|_| \__,_| \__,_|
 
+
+--
+
+vim.g.codeium_disable_bindings = 1
+
 --  modules
 
 require('plugin')
@@ -469,3 +474,10 @@ _G.fuzzy_search_operator = fuzzy_search_operator
 
 -- gt = go telescope
 vim.keymap.set('n', 'gt', fuzzy_search_operator, { expr = true })
+
+-- codeium
+
+vim.keymap.set('i', '<S-Cr>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+vim.keymap.set('i', '<M-]>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
+vim.keymap.set('i', '<M-[>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
+vim.keymap.set('i', '<M-BSlash>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
