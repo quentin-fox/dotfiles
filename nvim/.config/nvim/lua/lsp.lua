@@ -79,6 +79,7 @@ local function with_definition(prefix)
       { prefix .. 'd', definition },
       { prefix .. 'v', with_split('vs', definition) },
       { prefix .. 'x', with_split('sp', definition) },
+      { prefix .. 't', function() require('telescope.builtin').lsp_definitions() end }
     }
 
     for _, map in ipairs(maps) do
@@ -99,6 +100,7 @@ local function with_references(prefix)
     end
 
     vim.keymap.set('n', prefix .. 'r', references, { silent = true, buffer = bufnr })
+    vim.keymap.set('n', prefix .. 't', function() require('telescope.builtin').lsp_references() end, { silent = true, buffer = bufnr })
   end
 end
 
