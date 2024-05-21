@@ -25,8 +25,6 @@ vim.opt.hidden = false
 vim.opt.mouse = 'a'
 vim.opt.mousemodel = 'extend'
 vim.opt.confirm = true
-vim.opt.termencoding = 'utf-8'
-vim.opt.encoding = 'utf-8'
 vim.opt.inccommand = 'nosplit'
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -72,10 +70,6 @@ vim.api.nvim_create_autocmd('Filetype', {
     vim.opt.formatoptions:remove('c')
   end
 })
-
--- neovide
-
-vim.g.neovide_cursor_animation_length = 0
 
 -- diagnostic
 
@@ -154,7 +148,8 @@ vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = 'Gray', bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'VertSplit', { link = 'Normal', default = false })
 
 -- due to treesitter change, that highlights it as an Identifier
--- vim.api.nvim_set_hl(0, '@variable', { link = 'Normal' })
+-- vim.api.nvim_set_hl(0, '@variable', { link = 'Identifier' })
+-- vim.api.nvim_set_hl(0, '@punctuation', { link = 'Special' })
 -- vim.api.nvim_set_hl(0, 'Tag', { link = 'Identifier' })
 
 vim.g.markdown_fenced_languages = {
@@ -192,6 +187,7 @@ require('nvim-treesitter.configs').setup {
     "terraform",
     "tsx",
     "typescript",
+    "vimdoc",
     "yaml",
   },
   highlight = {
@@ -222,10 +218,6 @@ require('nvim-treesitter.configs').setup {
     },
   },
 }
-
-vim.cmd([[set foldmethod=expr]])
-vim.cmd([[set foldexpr=nvim_treesitter#foldexpr()]])
-vim.cmd([[set nofoldenable]])
 
 require('lualine').setup {
   options = {
@@ -329,13 +321,6 @@ require('dressing').setup {
     },
   },
 }
-
--- require('octo').setup {
---   file_panel = {
---     use_icons = false
---   }
--- }
-
 --  basic keybindings
 
 -- system c&p
@@ -369,11 +354,7 @@ local win_keys = { '<C-h>', '<C-j>', '<C-k>', '<C-l>' }
 
 for _, key in ipairs(win_keys) do
   vim.keymap.set('n', key, '<C-w>' .. key)
-  vim.keymap.set('t', key, [[<C-\><C-n><C-w>]] .. key)
 end
-
-vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
-vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]])
 
 -- linewise navigation on wrapped lines
 
