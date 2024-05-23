@@ -23,7 +23,7 @@ require('lsp')
 vim.opt.hidden = false
 -- vim.opt.shell = '/opt/homebrew/bin/fish'
 vim.opt.mouse = 'a'
-vim.opt.mousemodel = 'extend'
+vim.opt.mousemodel = 'popup_setpos'
 vim.opt.confirm = true
 vim.opt.inccommand = 'nosplit'
 vim.opt.ignorecase = true
@@ -33,9 +33,15 @@ vim.opt.wrap = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.pumheight = 5
+vim.opt.scrolloff = 10
 
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = 'number'
+
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldenable = false
+vim.opt.foldlevel = 0
 
 -- saves files in $XDG_STATE_HOME/nvim/undo//
 -- so doesn't clog up the project directory with undo files
@@ -323,15 +329,8 @@ require('dressing').setup {
 }
 --  basic keybindings
 
--- system c&p
-
-vim.keymap.set('v', 'sy', '"+y')
-vim.keymap.set('n', 'sy', '"+y')
-vim.keymap.set('n', 'sY', '"+yg_')
-
-vim.keymap.set('v', 'sp', '"+p')
-vim.keymap.set('n', 'sp', '"+p')
-vim.keymap.set('n', 'sP', '"+P')
+-- use mousemodel for system pasting
+-- instead of keybindings
 
 -- undo
 
