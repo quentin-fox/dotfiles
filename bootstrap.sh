@@ -58,6 +58,7 @@ STOW_DIRS=(
   kitty
   nvim
   npm
+  aerospace
 )
 
 stow -S "${STOW_DIRS[@]}"
