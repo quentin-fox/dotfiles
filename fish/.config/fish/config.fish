@@ -72,6 +72,15 @@ abbr gpo 'git push -u origin (git branch --show-current)'
 abbr glog 'git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 abbr mins 'nvim ~/opensports/minutes/(date "+%F").md'
 
+# asdf
+
+source ~/.asdf/asdf.fish
+
+# gcloud command line
+
+source ~/.asdf/installs/gcloud/471.0.0/path.fish.inc
+
+
 # }}}
 # {{{ interactive mode settings
 if isatty # running in interactive terminal, not just process
@@ -111,15 +120,6 @@ if isatty # running in interactive terminal, not just process
 	set fish_cursor_insert line
 	set fish_cursor_replace_one underscore
 	set fish_cursor_visual underscore
-
-	# asdf
-
-	source ~/.asdf/asdf.fish
-
-	# gcloud command line
-
-  source ~/.asdf/installs/gcloud/471.0.0/path.fish.inc
-
 end
 
 # }}}
