@@ -455,7 +455,7 @@ _G.fuzzy_search_operator = fuzzy_search_operator
 -- gs = go search
 -- by default is used for "go sleep" which is entirely useless
 -- whereas gt is useful for going to different tabs
-vim.keymap.set('n', 'gs', fuzzy_search_operator, { expr = true })
+vim.keymap.set('n', 'gz', fuzzy_search_operator, { expr = true })
 
 -- codeium
 
