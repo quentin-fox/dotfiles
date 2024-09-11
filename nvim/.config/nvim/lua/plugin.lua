@@ -28,6 +28,7 @@ require('packer').startup(function(use)
   use 'windwp/nvim-autopairs'
   use 'norcalli/nvim-colorizer.lua'
   use 'nvim-tree/nvim-tree.lua'
+  use 'MunifTanjim/nui.nvim'
 
   -- pickers
   use 'nvim-lua/plenary.nvim'
@@ -60,10 +61,17 @@ require('packer').startup(function(use)
   -- themes
   use 'quentin-fox/onedark.vim'
   use 'rakr/vim-one'
+  use 'rebelot/kanagawa.nvim'
 
   -- ai
 
   use 'Exafunction/codeium.vim'
+
+  use 'MeanderingProgrammer/render-markdown.nvim'
+  use {
+    'yetone/avante.nvim',
+    run = 'make BUILD_FROM_SOURCE=true'
+  }
 
   -- gh
   -- use 'pwntester/octo.nvim'
