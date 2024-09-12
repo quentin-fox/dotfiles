@@ -133,18 +133,21 @@ local palette = {
   blue = "#7eafd9",
   blue_light = "#abc6de",
   blue_dark = "#3b6487",
+  blue_darkest = "#254c6e",
 
-  red = "#be5046",
+  red = "#cc4b4b",
   red_light = "#d66c63",
   red_dark = "#91342c",
+  red_darkest = "#661912",
 
   green = "#96c475",
   green_light = "#a7c98f",
   green_dark = "#52703d",
+  green_darkest = "#2f4520",
 
   yellow = "#e5c07b",
   yellow_light = "#e8c980",
-  yellow_dark = "#e39d4d",
+  yellow_dark = "#b58222",
 
   aqua = "#7aa89f",
   aqua_light = "#93cfc7",
@@ -153,6 +156,7 @@ local palette = {
   violet = "#957fb8",
   violet_light = "#b6a3d4",
   violet_dark = "#665182",
+  violet_darkest = "#3b2a52",
 
   -- one-off colors, no shades required
   mint = "#aedbb3",
@@ -160,8 +164,8 @@ local palette = {
 
 local theme = {
   ui = {
-    fg         = palette.white3,
-    fg_dim     = palette.white4,
+    fg         = palette.white2,
+    fg_dim     = palette.white3,
     fg_reverse = palette.gray2,
 
     bg_dim     = palette.black3,
@@ -174,7 +178,7 @@ local theme = {
     bg_p1      = palette.black4,
     bg_p2      = palette.black5,
 
-    special    = palette.red_dark,
+    special    = palette.white4,
     whitespace = palette.black5,
     nontext    = palette.black5,
 
@@ -227,15 +231,15 @@ local theme = {
     hint    = palette.blue_light,
   },
   diff = {
-    add    = palette.green_dark,
-    delete = palette.red_dark,
-    change = palette.yellow_dark,
-    text   = palette.blue_dark,
+    add    = palette.green_darkest,
+    delete = palette.red_darkest,
+    change = palette.blue_darkest,
+    text   = palette.violet_darkest,
   },
   vcs = {
-    added   = palette.green_dark,
-    removed = palette.red_dark,
-    changed = palette.yellow_dark,
+    added   = palette.green_darkest,
+    removed = palette.red_darkest,
+    changed = palette.blue_darkest,
   },
 }
 
