@@ -59,7 +59,6 @@ require('packer').startup(function(use)
   use 'williamboman/mason-lspconfig.nvim'
 
   -- themes
-  use 'quentin-fox/onedark.vim'
   use 'rakr/vim-one'
   use 'rebelot/kanagawa.nvim'
 

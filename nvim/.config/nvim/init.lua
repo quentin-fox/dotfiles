@@ -127,7 +127,7 @@ local palette = {
 
   -- 
   gray1 = "#393836",
-  gray2 = "#625e5a",
+  gray2 = "#6a6a6a",
 
   -- colors
   blue = "#7eafd9",
@@ -156,13 +156,12 @@ local palette = {
 
   -- one-off colors, no shades required
   mint = "#aedbb3",
-  beige = "#ede8d0"
 }
 
 local theme = {
   ui = {
-    fg         = palette.white1,
-    fg_dim     = palette.white2,
+    fg         = palette.white3,
+    fg_dim     = palette.white4,
     fg_reverse = palette.gray2,
 
     bg_dim     = palette.black3,
@@ -179,14 +178,14 @@ local theme = {
     whitespace = palette.black5,
     nontext    = palette.black5,
 
-    bg_visual  = palette.yellow,
-    bg_search  = palette.yellow,
+    bg_visual  = palette.gray1,
+    bg_search  = palette.gray2,
 
     pmenu      = {
       fg       = palette.white2,
       fg_sel   = palette.white1,
       bg       = palette.black4,
-      bg_sel   = palette.gray1,
+      bg_sel   = palette.white3,
       bg_thumb = palette.black4,
       bg_sbar  = palette.black4,
     },
@@ -202,20 +201,20 @@ local theme = {
   syn = {
     string     = palette.green,
     variable   = palette.blue_light,
-    number     = palette.mint,
-    constant   = palette.violet_light,
+    number     = palette.aqua_dark,
+    constant   = palette.blue_light,
     identifier = palette.blue,
     parameter  = palette.blue,
     fun        = palette.red,
-    statement  = palette.blue_dark,
+    statement  = palette.yellow_light,
     keyword    = palette.yellow_light,
-    operator   = palette.white2,
-    preproc    = palette.violet_light,
-    type       = palette.blue_light,
+    operator   = palette.white3,
+    preproc    = palette.yellow_light,
+    type       = palette.yellow,
     regex      = palette.violet,
     deprecated = palette.gray1,
-    punct      = palette.white2,
-    comment    = palette.white4,
+    punct      = palette.white3,
+    comment    = palette.gray2,
     special1   = palette.red,
     special2   = palette.red,
     special3   = palette.violet_light,
@@ -267,17 +266,14 @@ require('kanagawa').setup({
     local theme = colors.theme
 
     return {
+      Directory = { fg = palette.blue },
+
       NormalFloat = { bg = "none" },
       FloatBorder = { bg = "none" },
       FloatTitle = { bg = "none" },
 
       LineNr = { fg = theme.ui.fg_reverse, bg = "none" },
-      CursorLineNr = { fg = theme.ui.fg, bg = "none", bold = true  },
-
-      Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },  -- add `blend = vim.o.pumblend` to enable transparency
-      PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
-      PmenuSbar = { bg = theme.ui.bg_m1 },
-      PmenuThumb = { bg = theme.ui.bg_p2 },
+      CursorLineNr = { fg = theme.ui.fg, bg = "none" },
 
       ["@variable"] = { fg = theme.syn.variable },
 
@@ -636,7 +632,7 @@ require('avante').setup(
     max_tokens = 4096,
   },
   behaviour = {
-    auto_suggestions = false, -- Experimental stage
+    auto_suggestions = true, -- Experimental stage
     auto_set_highlight_group = true,
     auto_set_keymaps = true,
     auto_apply_diff_after_generation = false,
