@@ -131,7 +131,7 @@ local palette = {
 
   -- colors
   blue = "#7eafd9",
-  blue_light = "#abc6de",
+  blue_light = "#69b8ff",
   blue_dark = "#3b6487",
   blue_darkest = "#254c6e",
 
@@ -157,9 +157,6 @@ local palette = {
   violet_light = "#b6a3d4",
   violet_dark = "#665182",
   violet_darkest = "#3b2a52",
-
-  -- one-off colors, no shades required
-  mint = "#aedbb3",
 }
 
 local theme = {
@@ -171,7 +168,7 @@ local theme = {
     bg_dim     = palette.black3,
     bg_gutter  = palette.black3,
 
-    bg_m3      = palette.black0,
+    bg_m3      = palette.black3,
     bg_m2      = palette.black1,
     bg_m1      = palette.black2,
     bg         = palette.black3,
@@ -195,9 +192,9 @@ local theme = {
     },
 
     float      = {
-      fg        = palette.white1,
+      fg        = palette.white3,
       bg        = palette.black3,
-      fg_border = palette.white1,
+      fg_border = palette.white3,
       bg_border = palette.black3,
     },
   },
@@ -278,6 +275,8 @@ require('kanagawa').setup({
 
       LineNr = { fg = theme.ui.fg_reverse, bg = "none" },
       CursorLineNr = { fg = theme.ui.fg, bg = "none" },
+
+      WinSeparator = { fg = palette.white4 },
 
       ["@variable"] = { fg = theme.syn.variable },
 
@@ -625,63 +624,63 @@ vim.keymap.set('i', '<M-BSlash>', function() return vim.fn['codeium#Clear']() en
 
 -- avante
 
-require('avante_lib').load()
-require('avante').setup(
-{
-  provider = "claude",
-  claude = {
-    endpoint = "https://api.anthropic.com",
-    model = "claude-3-5-sonnet-20240620",
-    temperature = 0,
-    max_tokens = 4096,
-  },
-  behaviour = {
-    auto_suggestions = true, -- Experimental stage
-    auto_set_highlight_group = true,
-    auto_set_keymaps = true,
-    auto_apply_diff_after_generation = false,
-    support_paste_from_clipboard = false,
-  },
-  mappings = {
-    diff = {
-      ours = "co",
-      theirs = "ct",
-      all_theirs = "ca",
-      both = "cb",
-      cursor = "cc",
-      next = "]x",
-      prev = "[x",
-    },
-    suggestion = {
-      accept = "<M-l>",
-      next = "<M-]>",
-      prev = "<M-[>",
-      dismiss = "<C-]>",
-    },
-    jump = {
-      next = "]]",
-      prev = "[[",
-    },
-    submit = {
-      normal = "<CR>",
-      insert = "<C-s>",
-    },
-  },
-  hints = { enabled = false },
-  windows = {
-    ---@type "right" | "left" | "top" | "bottom"
-    position = "right", -- the position of the sidebar
-    wrap = true, -- similar to vim.o.wrap
-    width = 30, -- default % based on available width
-  },
-  highlights = {
-    diff = {
-      current = "DiffChange",
-      incoming = "DiffAdd",
-    },
-  },
-  diff = {
-    autojump = true,
-    list_opener = "copen",
-  },
-})
+--require('avante_lib').load()
+--require('avante').setup(
+--{
+--  provider = "claude",
+--  claude = {
+--    endpoint = "https://api.anthropic.com",
+--    model = "claude-3-5-sonnet-20240620",
+--    temperature = 0,
+--    max_tokens = 4096,
+--  },
+--  behaviour = {
+--    auto_suggestions = true, -- Experimental stage
+--    auto_set_highlight_group = true,
+--    auto_set_keymaps = true,
+--    auto_apply_diff_after_generation = false,
+--    support_paste_from_clipboard = false,
+--  },
+--  mappings = {
+--    diff = {
+--      ours = "co",
+--      theirs = "ct",
+--      all_theirs = "ca",
+--      both = "cb",
+--      cursor = "cc",
+--      next = "]x",
+--      prev = "[x",
+--    },
+--    suggestion = {
+--      accept = "<M-l>",
+--      next = "<M-]>",
+--      prev = "<M-[>",
+--      dismiss = "<C-]>",
+--    },
+--    jump = {
+--      next = "]]",
+--      prev = "[[",
+--    },
+--    submit = {
+--      normal = "<CR>",
+--      insert = "<C-s>",
+--    },
+--  },
+--  hints = { enabled = false },
+--  windows = {
+--    ---@type "right" | "left" | "top" | "bottom"
+--    position = "right", -- the position of the sidebar
+--    wrap = true, -- similar to vim.o.wrap
+--    width = 30, -- default % based on available width
+--  },
+--  highlights = {
+--    diff = {
+--      current = "DiffChange",
+--      incoming = "DiffAdd",
+--    },
+--  },
+--  diff = {
+--    autojump = true,
+--    list_opener = "copen",
+--  },
+--})
