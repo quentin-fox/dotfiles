@@ -112,6 +112,7 @@ local diag_colors = {
 
 local palette = {
   -- whites, lightest to darkest, slightly beige-y
+  white0 = "#fdfdfd",
   white1 = "#faf4de",
   white2 = "#d2d4ca",
   white3 = "#a5a59f",
@@ -132,7 +133,7 @@ local palette = {
   -- colors
   blue = "#7eafd9",
   blue_light = "#69b8ff",
-  blue_dark = "#3b6487",
+  blue_dark = "#3782b2",
   blue_darkest = "#254c6e",
 
   red = "#cc4b4b",
@@ -144,14 +145,18 @@ local palette = {
   green_light = "#a7c98f",
   green_dark = "#52703d",
   green_darkest = "#2f4520",
+  green_bright = "#3aac2c",
 
   yellow = "#e5c07b",
   yellow_light = "#e8c980",
-  yellow_dark = "#b58222",
+  yellow_dark = "#d4b219",
+  yellow_bright = "#c7aa00",
 
   aqua = "#7aa89f",
   aqua_light = "#93cfc7",
   aqua_dark = "#5d8c86",
+
+  mint = "#06d29e",
 
   violet = "#957fb8",
   violet_light = "#b6a3d4",
@@ -225,6 +230,87 @@ local theme = {
     ok      = palette.green,
     warning = palette.yellow,
     info    = palette.white1,
+    hint    = palette.blue_light,
+  },
+  diff = {
+    add    = palette.green_darkest,
+    delete = palette.red_darkest,
+    change = palette.blue_darkest,
+    text   = palette.violet_darkest,
+  },
+  vcs = {
+    added   = palette.green_darkest,
+    removed = palette.red_darkest,
+    changed = palette.blue_darkest,
+  },
+}
+
+local theme_light = {
+  ui = {
+    fg         = palette.black2,
+    fg_dim     = palette.black3,
+    fg_reverse = palette.white4,
+
+    bg_dim     = palette.white3,
+    bg_gutter  = palette.white0,
+
+    bg_m3      = palette.white0,
+    bg_m2      = palette.white3,
+    bg_m1      = palette.white2,
+    bg         = palette.white0,
+    bg_p1      = palette.white3,
+    bg_p2      = palette.white4,
+
+    special    = palette.black2,
+    whitespace = palette.white3,
+    nontext    = palette.white3,
+
+    bg_visual  = palette.gray1,
+    bg_search  = palette.gray2,
+
+    pmenu      = {
+      fg       = palette.white2,
+      fg_sel   = palette.black1,
+      bg       = palette.black4,
+      bg_sel   = palette.white0,
+      bg_thumb = palette.black4,
+      bg_sbar  = palette.black4,
+    },
+
+    float      = {
+      fg        = palette.black4,
+      bg        = palette.white0,
+      fg_border = palette.black4,
+      bg_border = palette.white0,
+    },
+  },
+
+  syn = {
+    string     = palette.green_bright,
+    variable   = palette.blue_dark,
+    number     = palette.aqua_dark,
+    constant   = palette.blue_dark,
+    identifier = palette.blue_dark,
+    parameter  = palette.blue_dark,
+    fun        = palette.red,
+    statement  = palette.yellow_bright,
+    keyword    = palette.yellow_bright,
+    operator   = palette.black3,
+    preproc    = palette.yellow_bright,
+    type       = palette.yellow_bright,
+    regex      = palette.violet,
+    deprecated = palette.black5,
+    punct      = palette.gray1,
+    comment    = palette.white3,
+    special1   = palette.red,
+    special2   = palette.red,
+    special3   = palette.violet_dark,
+  },
+  diag = {
+    error   = palette.red,
+    ok      = palette.green,
+    warning = palette.yellow,
+    info    = palette.white0,
     hint    = palette.blue_light,
   },
   diff = {
