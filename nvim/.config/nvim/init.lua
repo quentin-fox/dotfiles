@@ -113,7 +113,7 @@ local diag_colors = {
 local palette = {
   -- whites, lightest to darkest, slightly beige-y
   white0 = "#fdfdfd",
-  white1 = "#faf4de",
+  white1 = "#eeeeee",
   white2 = "#d2d4ca",
   white3 = "#a5a59f",
   white4 = "#878783",
@@ -198,9 +198,9 @@ local theme = {
 
     float      = {
       fg        = palette.white3,
-      bg        = palette.black3,
+      bg        = palette.black4,
       fg_border = palette.white3,
-      bg_border = palette.black3,
+      bg_border = palette.black4,
     },
   },
 
@@ -282,9 +282,9 @@ local theme_light = {
 
     float      = {
       fg        = palette.black4,
-      bg        = palette.white0,
+      bg        = palette.white1,
       fg_border = palette.black4,
-      bg_border = palette.white0,
+      bg_border = palette.white1,
     },
   },
 
@@ -362,9 +362,9 @@ require('kanagawa').setup({
     return {
       Directory = { fg = palette.blue },
 
-      NormalFloat = { bg = "none" },
-      FloatBorder = { bg = "none" },
-      FloatTitle = { bg = "none" },
+      NormalFloat = { bg = theme.ui.float.bg },
+      FloatBorder = { bg = theme.ui.float.bg },
+      FloatTitle = { bg = theme.ui.float.bg },
 
       LineNr = { fg = theme.ui.fg_reverse, bg = "none" },
       CursorLineNr = { fg = theme.ui.fg, bg = "none" },
