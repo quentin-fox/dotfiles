@@ -111,12 +111,12 @@ local diag_colors = {
 }
 
 local palette = {
-  -- whites, lightest to darkest, slightly beige-y
+  -- whites, lightest to darkest
   white0 = "#fdfdfd",
   white1 = "#eeeeee",
-  white2 = "#d2d4ca",
-  white3 = "#a5a59f",
-  white4 = "#878783",
+  white2 = "#d4d4d4",
+  white3 = "#a5a5a5",
+  white4 = "#878787",
 
   -- blacks, darkest to lightest
   black0 = "#121212",
@@ -245,9 +245,6 @@ local theme = {
   },
 }
 
-local dragon = theme
-
-
 local theme_light = {
   ui = {
     fg         = palette.black2,
@@ -261,8 +258,8 @@ local theme_light = {
     bg_m2      = palette.white3,
     bg_m1      = palette.white2,
     bg         = palette.white0,
-    bg_p1      = palette.white3,
-    bg_p2      = palette.white4,
+    bg_p1      = palette.white1,
+    bg_p2      = palette.white2,
 
     special    = palette.black2,
     whitespace = palette.white3,
@@ -329,8 +326,10 @@ local theme_light = {
   },
 }
 
+vim.opt.background = 'dark'
+
 if vim.env.THEME == 'light' then
-  dragon = theme_light
+  vim.opt.background = 'light'
 end
 
 require('kanagawa').setup({
@@ -347,8 +346,8 @@ require('kanagawa').setup({
   colors = {                   -- add/modify theme and palette colors
     theme = {
       wave = {},
-      lotus = {},
-      dragon = dragon,
+      lotus = theme_light,
+      dragon = theme,
       all = {
         ui = {
           bg_gutter = "none"
@@ -396,9 +395,8 @@ require('kanagawa').setup({
   },
 })
 
-vim.cmd('colorscheme kanagawa-dragon')
+vim.cmd('colorscheme kanagawa')
 
-vim.opt.background = 'dark'
 vim.opt.termguicolors = true
 
 -- open hover window after updatetime without cursor moving
@@ -477,10 +475,16 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
+local lualine_theme = 'material'
+
+if vim.env.THEME == 'light' then
+  lualine_theme = 'onelight'
+end
+
 require('lualine').setup {
   options = {
     icons_enabled = false,
-    theme = 'material',
+    theme = lualine_theme,
     component_separators = { left = '', right = '' },
     section_separators = { left = '', right = '' },
   },
