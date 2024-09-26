@@ -239,11 +239,14 @@ local theme = {
     text   = palette.violet_darkest,
   },
   vcs = {
-    added   = palette.green_darkest,
-    removed = palette.red_darkest,
-    changed = palette.blue_darkest,
+    added   = palette.green,
+    removed = palette.red,
+    changed = palette.blue,
   },
 }
+
+local dragon = theme
+
 
 local theme_light = {
   ui = {
@@ -265,8 +268,8 @@ local theme_light = {
     whitespace = palette.white3,
     nontext    = palette.white3,
 
-    bg_visual  = palette.gray1,
-    bg_search  = palette.gray2,
+    bg_visual  = palette.white2,
+    bg_search  = palette.white3,
 
     pmenu      = {
       fg       = palette.white2,
@@ -314,20 +317,24 @@ local theme_light = {
     hint    = palette.blue_light,
   },
   diff = {
-    add    = palette.green_darkest,
-    delete = palette.red_darkest,
-    change = palette.blue_darkest,
-    text   = palette.violet_darkest,
+    add    = palette.green_light,
+    delete = palette.red_light,
+    change = palette.blue_light,
+    text   = palette.violet_light,
   },
   vcs = {
-    added   = palette.green_darkest,
-    removed = palette.red_darkest,
-    changed = palette.blue_darkest,
+    added   = palette.green,
+    removed = palette.red,
+    changed = palette.blue,
   },
 }
 
+if vim.env.THEME == 'light' then
+  dragon = theme_light
+end
+
 require('kanagawa').setup({
-  compile = true,             -- enable compiling the colorscheme
+  compile = false,             -- enable compiling the colorscheme
   undercurl = false,            -- enable undercurls
   commentStyle = { italic = false },
   functionStyle = {},
@@ -341,7 +348,7 @@ require('kanagawa').setup({
     theme = {
       wave = {},
       lotus = {},
-      dragon = theme,
+      dragon = dragon,
       all = {
         ui = {
           bg_gutter = "none"

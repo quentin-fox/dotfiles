@@ -7,6 +7,6 @@ java zulu-17.50.19
 deno 1.40.4
 gcloud 471.0.0
 cue 0.4.3
-gleam 1.4.0
+gleam 1.5.0
 haskell 9.4.4
 rust 1.81.0
