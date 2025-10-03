@@ -58,7 +58,8 @@ vim.pack.add({
   { src = "https://github.com/nvim-tree/nvim-tree.lua" },
   { src = "https://github.com/Saghen/blink.cmp" },
   { src = "https://github.com/neovim/nvim-lspconfig" },
-  { src = "https://github.com/nvim-lualine/lualine.nvim" }
+  { src = "https://github.com/nvim-lualine/lualine.nvim" },
+  { src = "https://github.com/Exafunction/windsurf.nvim" }
 })
 
 -- {{{ theming
@@ -648,12 +649,23 @@ vim.diagnostic.config({
 
 --- }}}
 
+--- {{{ codeium
+
+require("codeium").setup({
+  enable_cmp_source = false
+})
+
+--- }}}
+
 --- {{{ blink
 
 require("blink-cmp").setup({
   fuzzy = { implementation = "lua" },
   sources = {
-    default = { "lsp", "path" }
+    default = { "lsp", "path", "codeium" },
+    providers = {
+      codeium = { name = 'Codeium', module = 'codeium.blink', async = true }
+    }
   }
 })
 
