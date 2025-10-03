@@ -56,10 +56,6 @@ set -x GITHUB_PACKAGE_TOKEN (gh auth token)
 abbr gpo 'git push -u origin (git branch --show-current)'
 abbr glog 'git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 
-# gcloud command line
-
-source ~/.asdf/installs/gcloud/471.0.0/path.fish.inc
-
 # }}}
 
 # vi mode
