@@ -3,10 +3,10 @@
 
 
 vim.opt.hidden = false
-vim.opt.mouse = 'a'
-vim.opt.mousemodel = 'popup_setpos'
+vim.opt.mouse = "a"
+vim.opt.mousemodel = "popup_setpos"
 vim.opt.confirm = true
-vim.opt.inccommand = 'nosplit'
+vim.opt.inccommand = "nosplit"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.textwidth = 0
@@ -17,7 +17,7 @@ vim.opt.pumheight = 5
 vim.opt.scrolloff = 10
 
 vim.opt.cursorline = true
-vim.opt.cursorlineopt = 'number'
+vim.opt.cursorlineopt = "number"
 
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
@@ -56,6 +56,9 @@ vim.pack.add({
   { src = "https://github.com/norcalli/nvim-colorizer.lua" },
   { src = "https://github.com/antosha417/nvim-lsp-file-operations" },
   { src = "https://github.com/nvim-tree/nvim-tree.lua" },
+  { src = "https://github.com/Saghen/blink.cmp" },
+  { src = "https://github.com/neovim/nvim-lspconfig" },
+  { src = "https://github.com/nvim-lualine/lualine.nvim" }
 })
 
 -- {{{ theming
@@ -86,10 +89,10 @@ vim.diagnostic.config {
 --  colorscheme
 
 local diag_colors = {
-  error = '#be5046',
-  warn = '#e5c07b',
-  info = '#abb2bf',
-  hint = '#abc2af',
+  error = "#be5046",
+  warn = "#e5c07b",
+  info = "#abb2bf",
+  hint = "#abc2af",
 }
 
 local palette = {
@@ -308,18 +311,7 @@ local theme_light = {
   },
 }
 
-require("auto-dark-mode").setup({
-    set_dark_mode = function()
-      vim.opt.background = 'dark'
-    end,
-    set_light_mode = function()
-      vim.opt.background = 'light'
-    end,
-    update_interval = 3000,
-    fallback = "dark"
-})
-
-require('kanagawa').setup({
+require("kanagawa").setup({
   compile = false,             -- enable compiling the colorscheme
   undercurl = false,            -- enable undercurls
   commentStyle = { italic = false },
@@ -385,11 +377,72 @@ require('kanagawa').setup({
 vim.cmd("colorscheme kanagawa")
 
 
+require("lualine").setup({
+  options = {
+    icons_enabled = false,
+    theme = "material",
+    component_separators = { left = "", right = "" },
+    section_separators = { left = "", right = "" },
+  },
+  sections = {
+    lualine_a = { "mode" },
+    lualine_b = { "filename" },
+    lualine_c = { 
+      { 
+        "diagnostics",
+
+        sections = { "error", "warn", "info", "hint" },
+
+        diagnostics_color = {
+          error = "DiagnosticStatusError", -- Changes diagnostics" error color.
+          warn  = "DiagnosticStatusWarn",  -- Changes diagnostics" warn color.
+          info  = "DiagnosticStatusInfo",  -- Changes diagnostics" info color.
+          hint  = "DiagnosticStatusHint",  -- Changes diagnostics" hint color.
+        },
+        symbols = {
+          error = "● ",
+          warn = "● ",
+          info = "● ",
+          hint = "● ",
+        },
+        colored = true,           -- Displays diagnostics status in color if set to true.
+        update_in_insert = false, -- Update diagnostics in insert mode.
+        always_visible = false,   -- Show diagnostics even if there are none.
+      },
+    },
+    lualine_x = {},
+    lualine_y = { "progress" },
+    lualine_z = { "location" },
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = { "filename" },
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = { "progress" },
+    lualine_z = { "location" },
+  },
+})
+
+require("auto-dark-mode").setup({
+    set_dark_mode = function()
+      vim.opt.background = "dark"
+      require("lualine").setup({ options = { theme = "material" }})
+    end,
+    set_light_mode = function()
+      vim.opt.background = "light"
+      require("lualine").setup({ options = { theme = "onelight" }})
+    end,
+    update_interval = 3000,
+    fallback = "dark"
+})
+
+
 --- }}}
 
 --- {{{ treesitter
 
-require('nvim-treesitter.configs').setup {
+require("nvim-treesitter.configs").setup {
   ensure_installed = {
     "bash",
     "bash",
@@ -441,10 +494,10 @@ require('nvim-treesitter.configs').setup {
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = 'g<CR>',
-      scope_incremental = '<CR>',
-      node_incremental = '<TAB>',
-      node_decremental = '<S-TAB>',
+      init_selection = "g<CR>",
+      scope_incremental = "<CR>",
+      node_incremental = "<TAB>",
+      node_decremental = "<S-TAB>",
     },
   },
 }
@@ -453,13 +506,13 @@ require('nvim-treesitter.configs').setup {
 
 --- {{{ plugin setup
 
-require('colorizer').setup()
+require("colorizer").setup()
 
-require('nvim-autopairs').setup {
+require("nvim-autopairs").setup {
   check_ts = true,
 }
 
-require('nvim-tree').setup {
+require("nvim-tree").setup {
   modified = {
     enable = true,
   },
@@ -472,9 +525,9 @@ require('nvim-tree').setup {
         git = false,
         modified = true,
       },
-      modified_placement = 'before',
+      modified_placement = "before",
       glyphs = {
-        modified = 'M'
+        modified = "M"
       }
     },
     indent_markers = {
@@ -484,7 +537,7 @@ require('nvim-tree').setup {
   },
 }
 
-require('fzf-lua').setup({
+require("fzf-lua").setup({
   { "default" }
 })
 
@@ -494,72 +547,114 @@ require("lsp-file-operations").setup()
 
 --- {{{ core keybinds
 
-vim.keymap.set('n', 'U', '<C-r>')
+vim.keymap.set("n", "U", "<C-r>")
 
 -- align text after jumping
 
-vim.keymap.set('n', 'g;', 'g;zz')
-vim.keymap.set('n', 'g,', 'g,zz')
-vim.keymap.set('n', 'n', 'nzz')
-vim.keymap.set('n', 'N', 'Nzz')
+vim.keymap.set("n", "g;", "g;zz")
+vim.keymap.set("n", "g,", "g,zz")
+vim.keymap.set("n", "n", "nzz")
+vim.keymap.set("n", "N", "Nzz")
 
 -- gp to select what was last pasted
 
-vim.keymap.set('n', 'gp', '`[v`]')
+vim.keymap.set("n", "gp", "`[v`]")
 
 -- simpler window navigation
 
-local win_keys = { '<C-h>', '<C-j>', '<C-k>', '<C-l>' }
+-- local win_keys = { "<C-h>", "<C-j>", "<C-k>", "<C-l>" }
 
-for _, key in ipairs(win_keys) do
-  vim.keymap.set('n', key, '<C-w>' .. key)
-end
+-- for _, key in ipairs(win_keys) do
+  -- vim.keymap.set("n", key, "<C-w>" .. key)
+-- end
 
 -- linewise navigation on wrapped lines
 
-vim.keymap.set('n', 'j', function()
-  return vim.v.count == 0 and 'gj' or 'j'
+vim.keymap.set("n", "j", function()
+  return vim.v.count == 0 and "gj" or "j"
 end, { expr = true })
-vim.keymap.set('n', 'k', function()
-  return vim.v.count == 0 and 'gk' or 'k'
+vim.keymap.set("n", "k", function()
+  return vim.v.count == 0 and "gk" or "k"
 end, { expr = true })
 
 -- replace current word in line
 
-vim.keymap.set('n', 'X', ':s/<C-r><C-w>//g<Left><Left>')
+vim.keymap.set("n", "X", ":s/<C-r><C-w>//g<Left><Left>")
 
 -- clear highlight
 
-vim.keymap.set('n', '-', '<cmd>nohlsearch<Cr>', { silent = true })
+vim.keymap.set("n", "-", "<cmd>nohlsearch<Cr>", { silent = true })
 
 --- }}}
 
 -- {{{ plugin keybinds
 
 
-vim.keymap.set('n', '~', '<cmd>Git<Cr>')
+vim.keymap.set("n", "~", "<cmd>Git<Cr>")
 
-vim.keymap.set('n', 'gm', function()
-  require('nvim-tree.api').tree.toggle({
-    path = vim.fn.expand('%:p:h'),
+vim.keymap.set("n", "gm", function()
+  require("nvim-tree.api").tree.toggle({
+    path = vim.fn.expand("%:p:h"),
     find_file = true,
     update_root = true
   })
 end)
 
-vim.keymap.set('n', 'gn', function()
-  require('nvim-tree.api').tree.toggle({
+vim.keymap.set("n", "gn", function()
+  require("nvim-tree.api").tree.toggle({
     path = vim.fn.getcwd(),
     update_root = true
   })
 end)
 
-local fzf = require('fzf-lua')
+local fzf = require("fzf-lua")
 
 vim.keymap.set("n", "<C-k>", fzf.builtin)
 vim.keymap.set("n", "<C-p>", fzf.files)
 vim.keymap.set("n", "<C-l>", fzf.live_grep)
 vim.keymap.set("n", "<C-g>", fzf.grep_project)
 
+-- same as default, but use fzf-lua to handle multiple items
+-- instead of qf list
+
+vim.keymap.set("n", "gra", fzf.lsp_code_actions)
+vim.keymap.set("n", "gri", fzf.lsp_implementations)
+vim.keymap.set("n", "grr", fzf.lsp_references)
+vim.keymap.set("n", "grd", fzf.lsp_definitions)
+vim.keymap.set("n", "grt", fzf.lsp_typedefs)
+vim.keymap.set("n", "gre", fzf.lsp_document_diagnostics)
+
 --- }}}
 
+--- {{{ lsp
+
+vim.lsp.enable("ts_ls")
+vim.lsp.enable("eslint")
+vim.lsp.enable("prettier")
+vim.lsp.enable("jsonls")
+vim.lsp.enable("yamlls")
+vim.lsp.enable("terraformls")
+
+vim.diagnostic.config({
+  signs = {
+    severity = {
+      vim.diagnostic.severity.ERROR,
+      vim.diagnostic.severity.WARN,
+      vim.diagnostic.severity.HINT,
+      vim.diagnostic.severity.INFO,
+    }
+  }
+})
+
+--- }}}
+
+--- {{{ blink
+
+require("blink-cmp").setup({
+  fuzzy = { implementation = "lua" },
+  sources = {
+    default = { "lsp", "path" }
+  }
+})
+
+--- }}}
