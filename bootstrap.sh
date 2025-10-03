@@ -14,13 +14,6 @@ else
   exit 1
 fi
 
-if [ -z $GITHUB_TOKEN ]
-then
-  error 'GITHUB_TOKEN environment variable not set'
-  exit 1
-fi
-
-
 if xcode-select --install
 then
   info 'wait for command line utilities to finish installing'
@@ -101,16 +94,3 @@ asdf plugin-add rust https://github.com/asdf-community/asdf-rust.git
 
 info 'Installing global versions of asdf plugins'
 asdf install
-
-# custom tools
-
-go install github.com/quentin-fox/togglhours@latest
-go install github.com/quentin-fox/structinit@latest
-go install github.com/quentin-fox/gsel@latest
-
-# will be set in ~/.npmrc
-npm config set //npm.pkg.github.com/:_authToken $GITHUB_TOKEN
-
-# installer packer packages
-
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'

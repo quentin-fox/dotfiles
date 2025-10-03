@@ -66,11 +66,6 @@ require('packer').startup(function(use)
 
   use 'Exafunction/codeium.vim'
 
-  use {
-    'yetone/avante.nvim',
-    run = 'make BUILD_FROM_SOURCE=true'
-  }
-
   -- gh
   -- use 'pwntester/octo.nvim'
 
