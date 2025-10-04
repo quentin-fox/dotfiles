@@ -668,9 +668,6 @@ vim.lsp.enable("jsonls")
 vim.lsp.enable("yamlls")
 vim.lsp.enable("terraformls")
 
-vim.diagnostic.config({
-})
-
 --- }}}
 
 --- {{{ codeium
