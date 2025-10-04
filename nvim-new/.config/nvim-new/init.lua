@@ -38,8 +38,7 @@ vim.opt.termguicolors = true
 vim.g.do_filetype_lua = 1
 
 --- }}}
-
--- plugins
+--- {{{ plugins
 
 vim.pack.add({
   { src = "https://github.com/nvim-lua/plenary.nvim" },
@@ -63,7 +62,8 @@ vim.pack.add({
   { src = "https://github.com/stevearc/conform.nvim" },
 })
 
--- {{{ theming
+--- }}}
+--- {{{ theming
 
 -- diagnostic
 
@@ -447,7 +447,6 @@ require("auto-dark-mode").setup({
 
 
 --- }}}
-
 --- {{{ treesitter
 
 require("nvim-treesitter.configs").setup {
@@ -511,7 +510,6 @@ require("nvim-treesitter.configs").setup {
 }
 
 --- }}}
-
 --- {{{ plugin setup
 
 require("colorizer").setup()
@@ -563,7 +561,6 @@ require "conform".setup({
 })
 
 --- }}}
-
 --- {{{ core keybinds
 
 vim.keymap.set("n", "U", "<C-r>")
@@ -618,8 +615,7 @@ vim.keymap.set('n', 'gK', function()
 end)
 
 --- }}}
-
--- {{{ plugin keybinds
+--- {{{ plugin keybinds
 
 vim.keymap.set("n", "<leader>pr", function() require("conform").format({ async = true, lsp_fallback = true }) end)
 
@@ -647,18 +643,11 @@ vim.keymap.set("n", "<C-p>", fzf.files)
 vim.keymap.set("n", "<C-l>", fzf.live_grep)
 vim.keymap.set("n", "<C-g>", fzf.grep_project)
 
--- same as default, but use fzf-lua to handle multiple items
--- instead of qf list
+-- add missing keybinds to go to definition
 
-vim.keymap.set("n", "gra", fzf.lsp_code_actions)
-vim.keymap.set("n", "gri", fzf.lsp_implementations)
-vim.keymap.set("n", "grr", fzf.lsp_references)
-vim.keymap.set("n", "grd", fzf.lsp_definitions)
-vim.keymap.set("n", "grt", fzf.lsp_typedefs)
-vim.keymap.set("n", "gre", fzf.lsp_document_diagnostics)
+vim.keymap.set("n", "grd", vim.lsp.buf.definition)
 
 --- }}}
-
 --- {{{ lsp
 
 vim.lsp.enable("ts_ls")
@@ -669,7 +658,6 @@ vim.lsp.enable("yamlls")
 vim.lsp.enable("terraformls")
 
 --- }}}
-
 --- {{{ codeium
 
 require("codeium").setup({
@@ -689,7 +677,6 @@ require("codeium").setup({
 })
 
 --- }}}
-
 --- {{{ blink
 
 require("blink-cmp").setup({
