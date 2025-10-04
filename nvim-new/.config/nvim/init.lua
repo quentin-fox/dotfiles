@@ -643,10 +643,6 @@ vim.keymap.set("n", "<C-p>", fzf.files)
 vim.keymap.set("n", "<C-l>", fzf.live_grep)
 vim.keymap.set("n", "<C-g>", fzf.grep_project)
 
--- add missing keybinds to go to definition
-
-vim.keymap.set("n", "grd", vim.lsp.buf.definition)
-
 --- }}}
 --- {{{ lsp
 
