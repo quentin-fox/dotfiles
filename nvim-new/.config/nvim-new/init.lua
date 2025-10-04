@@ -67,25 +67,32 @@ vim.pack.add({
 
 -- diagnostic
 
-local min_severity = {
-  min = vim.diagnostic.severity.INFO
+local all_levels = {
+  vim.diagnostic.severity.ERROR,
+  vim.diagnostic.severity.WARN,
+  vim.diagnostic.severity.HINT,
+  vim.diagnostic.severity.INFO,
 }
 
-vim.diagnostic.config {
+vim.diagnostic.config({
   severity_sort = true,
+  signs = {
+    severity = all_levels,
+  },
   underline = {
-    severity = min_severity,
+    severity = all_levels,
   },
   virtual_text = {
-    severity = min_severity,
+    severity = all_levels,
   },
+  virtual_lines = false,
   signs = {
-    severity = min_severity,
+    severity = all_levels,
   },
   float = {
-    severity = min_severity,
+    severity = all_levels,
   },
-}
+})
 
 --
 --  colorscheme
@@ -378,7 +385,6 @@ require("kanagawa").setup({
 
 vim.cmd("colorscheme kanagawa")
 
-
 require("lualine").setup({
   options = {
     icons_enabled = false,
@@ -598,6 +604,19 @@ vim.keymap.set("n", "X", ":s/<C-r><C-w>//g<Left><Left>")
 
 vim.keymap.set("n", "-", "<cmd>nohlsearch<Cr>", { silent = true })
 
+vim.keymap.set('n', 'gK', function()
+  local config = vim.diagnostic.config()
+  local virtual_text = { severity = all_levels }
+  local virtual_lines = false
+
+  if not config.virtual_lines then
+    virtual_text = false
+    virtual_lines = { severity = all_levels }
+  end
+
+  vim.diagnostic.config({ virtual_lines = virtual_lines, virtual_text = virtual_text })
+end)
+
 --- }}}
 
 -- {{{ plugin keybinds
@@ -650,14 +669,6 @@ vim.lsp.enable("yamlls")
 vim.lsp.enable("terraformls")
 
 vim.diagnostic.config({
-  signs = {
-    severity = {
-      vim.diagnostic.severity.ERROR,
-      vim.diagnostic.severity.WARN,
-      vim.diagnostic.severity.HINT,
-      vim.diagnostic.severity.INFO,
-    }
-  }
 })
 
 --- }}}
