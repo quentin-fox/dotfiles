@@ -59,7 +59,8 @@ vim.pack.add({
   { src = "https://github.com/Saghen/blink.cmp" },
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/nvim-lualine/lualine.nvim" },
-  { src = "https://github.com/Exafunction/windsurf.nvim" }
+  { src = "https://github.com/Exafunction/windsurf.nvim" },
+  { src = "https://github.com/stevearc/conform.nvim" },
 })
 
 -- {{{ theming
@@ -544,6 +545,17 @@ require("fzf-lua").setup({
 
 require("lsp-file-operations").setup()
 
+require "conform".setup({
+    notify_on_error = true,
+    formatters_by_ft = {
+        javascript = { "prettier" },
+        typescript = { "prettier" },
+        javascriptreact = { "prettier" },
+        typescriptreact = { "prettier" },
+        html = { "prettier" },
+    },
+})
+
 --- }}}
 
 --- {{{ core keybinds
@@ -590,6 +602,7 @@ vim.keymap.set("n", "-", "<cmd>nohlsearch<Cr>", { silent = true })
 
 -- {{{ plugin keybinds
 
+vim.keymap.set("n", "<leader>pr", function() require("conform").format({ async = true, lsp_fallback = true }) end)
 
 vim.keymap.set("n", "~", "<cmd>Git<Cr>")
 
@@ -652,7 +665,19 @@ vim.diagnostic.config({
 --- {{{ codeium
 
 require("codeium").setup({
-  enable_cmp_source = false
+  enable_cmp_source = false,
+  virtual_text = {
+    enabled = true,
+    map_keys = true,
+    key_bindings = {
+      accept = "<S-CR>",
+      accept_word = false,
+      accept_line = false,
+      clear = false,
+      prev = false,
+      next = false,
+    }
+  }
 })
 
 --- }}}
@@ -662,10 +687,7 @@ require("codeium").setup({
 require("blink-cmp").setup({
   fuzzy = { implementation = "lua" },
   sources = {
-    default = { "lsp", "path", "codeium" },
-    providers = {
-      codeium = { name = 'Codeium', module = 'codeium.blink', async = true }
-    }
+    default = { "lsp", "path" },
   }
 })
 
