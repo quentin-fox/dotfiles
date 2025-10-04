@@ -42,6 +42,7 @@ set -x PATH /opt/homebrew/opt/libpq/bin $PATH
 set -x PATH /usr/local/opt/zip/bin/ $PATH
 set -x PATH /Applications/kitty.app/Contents/MacOS/ $PATH
 set -x PATH ~/bin/ $PATH
+set -x PATH ~/bin/nvim-macos-arm64/bin/ $PATH
 set -x PATH /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin $PATH
 set -x PATH ~/.rd/bin $PATH
 
