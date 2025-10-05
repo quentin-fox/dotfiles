@@ -609,6 +609,37 @@ vim.keymap.set("n", "<C-p>", fzf.files)
 vim.keymap.set("n", "<C-l>", fzf.live_grep)
 vim.keymap.set("n", "<C-g>", fzf.grep_project)
 
+local function fuzzy_search_operator(motion)
+  if motion == nil then
+    vim.opt.operatorfunc = 'v:lua.fuzzy_search_operator'
+    return 'g@'
+  end
+
+  if motion == 'char' then
+    local row = 1
+    local col = 2
+
+
+    local text_start = vim.api.nvim_buf_get_mark(0, '[')
+    local text_end = vim.api.nvim_buf_get_mark(0, ']')
+
+    local lines = vim.api.nvim_buf_get_text(0, text_start[row] - 1, text_start[col], text_end[row] - 1, text_end[col] + 1, {})
+
+    require('fzf-lua').live_grep({
+      query = lines[1]
+    })
+  else
+    print("must use char motion")
+  end
+end
+
+_G.fuzzy_search_operator = fuzzy_search_operator
+
+-- gs = go search
+-- by default is used for "go sleep" which is entirely useless
+-- whereas gt is useful for going to different tabs
+vim.keymap.set('n', 'gz', fuzzy_search_operator, { expr = true })
+
 --- }}}
 --- {{{ lsp
 
