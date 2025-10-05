@@ -1,0 +1,36 @@
+1. swap scroll direction
+2. map caps lock to escape
+3. xcode-select --install
+4. move dock to the right side + shrink
+5. reduce display scaling
+6. set up mail configuration
+7. no alfred, just use new spotlight when it comes out in a few months
+
+TODO
+
+1. transfer passwords from firefox (maybe create FF account to sync them)
+2. move secrets file from ~/.config/fish/conf.d/secrets.fish
+3. change to simpler nvim setup?
+4. install android studio and xcode
+
+random desktop software:
+- adguard + get license
+- chatgpt
+- spotify
+- obsidian
+- android studio
+- xcode
+- linear
+- loom
+- tableplus + get license
+- qbittorrent? maybe we can do something fun and self-hosted
+
+probably from brew:
+
+- kitty
+- firefox
+
+random binaries to download (not on brew):
+
+- nvim latest
+- cloud-sql-proxy
