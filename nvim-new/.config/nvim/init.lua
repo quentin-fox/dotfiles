@@ -53,13 +53,12 @@ vim.pack.add({
   { src = "https://github.com/ibhagwan/fzf-lua" },
   { src = "https://github.com/windwp/nvim-autopairs" },
   { src = "https://github.com/norcalli/nvim-colorizer.lua" },
-  { src = "https://github.com/antosha417/nvim-lsp-file-operations" },
-  { src = "https://github.com/nvim-tree/nvim-tree.lua" },
   { src = "https://github.com/Saghen/blink.cmp" },
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/nvim-lualine/lualine.nvim" },
   { src = "https://github.com/Exafunction/windsurf.nvim" },
   { src = "https://github.com/stevearc/conform.nvim" },
+  { src = "https://github.com/stevearc/oil.nvim" }
 })
 
 --- }}}
@@ -518,38 +517,11 @@ require("nvim-autopairs").setup {
   check_ts = true,
 }
 
-require("nvim-tree").setup {
-  modified = {
-    enable = true,
-  },
-  renderer = {
-    icons = {
-      show = {
-        file = false,
-        folder = false,
-        folder_arrow = false,
-        git = false,
-        modified = true,
-      },
-      modified_placement = "before",
-      glyphs = {
-        modified = "M"
-      }
-    },
-    indent_markers = {
-      enable = true
-    },
-    special_files = {}
-  },
-}
-
 require("fzf-lua").setup({
   { "default" }
 })
 
-require("lsp-file-operations").setup()
-
-require "conform".setup({
+require("conform").setup({
     notify_on_error = true,
     formatters_by_ft = {
         javascript = { "prettier" },
@@ -558,6 +530,12 @@ require "conform".setup({
         typescriptreact = { "prettier" },
         html = { "prettier" },
     },
+})
+
+require("oil").setup({
+  view_options = {
+    show_hidden = true
+  }
 })
 
 --- }}}
@@ -621,20 +599,8 @@ vim.keymap.set("n", "<leader>pr", function() require("conform").format({ async =
 
 vim.keymap.set("n", "~", "<cmd>Git<Cr>")
 
-vim.keymap.set("n", "gm", function()
-  require("nvim-tree.api").tree.toggle({
-    path = vim.fn.expand("%:p:h"),
-    find_file = true,
-    update_root = true
-  })
-end)
-
-vim.keymap.set("n", "gn", function()
-  require("nvim-tree.api").tree.toggle({
-    path = vim.fn.getcwd(),
-    update_root = true
-  })
-end)
+vim.keymap.set("n", "gn", "<cmd>edit .<Cr>")
+vim.keymap.set("n", "gm", "<cmd>edit %:p:h<Cr>")
 
 local fzf = require("fzf-lua")
 
