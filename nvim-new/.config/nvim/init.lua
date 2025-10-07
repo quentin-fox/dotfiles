@@ -37,6 +37,17 @@ vim.opt.termguicolors = true
 
 vim.g.do_filetype_lua = 1
 
+-- override $VIMRUNTIME/ftplugin/*.vim adding cro to the formatoptions opt
+
+vim.api.nvim_create_autocmd('Filetype', {
+  pattern = '*',
+  callback = function()
+    vim.opt.formatoptions:remove('c') -- auto-wraps comments of a given length
+    vim.opt.formatoptions:remove('r') -- inserts the current comment leader when newline in insert mode
+    vim.opt.formatoptions:remove('o') -- inserts the current comment leader when hitting O/o on a comment line 
+  end
+})
+
 --- }}}
 --- {{{ plugins
 
@@ -85,9 +96,6 @@ vim.diagnostic.config({
     severity = all_levels,
   },
   virtual_lines = false,
-  signs = {
-    severity = all_levels,
-  },
   float = {
     severity = all_levels,
   },
@@ -451,7 +459,6 @@ require("auto-dark-mode").setup({
 require("nvim-treesitter.configs").setup {
   ensure_installed = {
     "bash",
-    "bash",
     "css",
     "fish",
     "gitignore",
@@ -466,6 +473,7 @@ require("nvim-treesitter.configs").setup {
     "java",
     "javascript",
     "json",
+    "jsonc",
     "lua",
     "markdown",
     "ruby",
@@ -649,25 +657,26 @@ vim.lsp.enable("prettier")
 vim.lsp.enable("jsonls")
 vim.lsp.enable("yamlls")
 vim.lsp.enable("terraformls")
+vim.lsp.enable("cssmodules_ls")
 
 --- }}}
 --- {{{ codeium
 
-require("codeium").setup({
-  enable_cmp_source = false,
-  virtual_text = {
-    enabled = true,
-    map_keys = true,
-    key_bindings = {
-      accept = "<S-CR>",
-      accept_word = false,
-      accept_line = false,
-      clear = false,
-      prev = false,
-      next = false,
-    }
-  }
-})
+-- require("codeium").setup({
+--   enable_cmp_source = false,
+--   virtual_text = {
+--     enabled = true,
+--     map_keys = true,
+--     key_bindings = {
+--       accept = "<S-CR>",
+--       accept_word = false,
+--       accept_line = false,
+--       clear = false,
+--       prev = false,
+--       next = false,
+--     }
+--   }
+-- })
 
 --- }}}
 --- {{{ blink

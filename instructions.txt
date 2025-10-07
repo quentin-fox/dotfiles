@@ -24,6 +24,7 @@ random desktop software:
 - loom
 - tableplus + get license
 - qbittorrent? maybe we can do something fun and self-hosted
+- docker DESKTOP (on top of docker via brew)
 
 probably from brew:
 
