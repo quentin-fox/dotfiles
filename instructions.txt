@@ -25,6 +25,7 @@ random desktop software:
 - tableplus + get license
 - qbittorrent? maybe we can do something fun and self-hosted
 - docker DESKTOP (on top of docker via brew)
+- pixelmator (app store)
 
 probably from brew:
 
