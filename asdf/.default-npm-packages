@@ -5,3 +5,4 @@ source-map-cli
 typescript-language-server
 zapier-platform-cli
 detox-cli
+@github/copilot-language-server
