@@ -131,7 +131,8 @@ local palette = {
 
   -- 
   gray1 = "#393836",
-  gray2 = "#6a6a6a",
+  gray2 = "#525252",
+  gray3 = "#6a6a6a",
 
   -- colors
   blue = "#7eafd9",
@@ -171,7 +172,7 @@ local theme = {
   ui = {
     fg         = palette.white2,
     fg_dim     = palette.white3,
-    fg_reverse = palette.gray2,
+    fg_reverse = palette.gray3,
 
     bg_dim     = palette.black3,
     bg_gutter  = palette.black3,
@@ -185,10 +186,10 @@ local theme = {
 
     special    = palette.white4,
     whitespace = palette.black5,
-    nontext    = palette.black5,
+    nontext    = palette.gray2,
 
     bg_visual  = palette.gray1,
-    bg_search  = palette.gray2,
+    bg_search  = palette.gray3,
 
     pmenu      = {
       fg       = palette.white2,
@@ -223,7 +224,7 @@ local theme = {
     regex      = palette.violet,
     deprecated = palette.gray1,
     punct      = palette.white3,
-    comment    = palette.gray2,
+    comment    = palette.gray3,
     special1   = palette.red,
     special2   = palette.red,
     special3   = palette.violet_light,
@@ -674,13 +675,31 @@ vim.lsp.inline_completion.enable() -- to turn it on
 --- {{{ copilot
 
 require("copilot").setup({})
-require("sidekick").setup({})
 
 vim.keymap.set('i', '<S-Cr>', function()
   if not vim.lsp.inline_completion.get() then
     return '<S-Cr>'
   end
 end, { expr = true })
+
+-- disabled by default
+vim.g.sidekick_nes = false
+
+-- when we use keybinding, lazy load and enable
+vim.keymap.set('n', 'gai', function()
+  vim.g.sidekick_nes = not vim.g.sidekick_nes
+
+  require("sidekick").setup({
+    nes = {
+      enabled = vim.g.sidekick_nes
+    }
+  })
+
+  local enabled_str = vim.g.sidekick_nes and "enabled" or "disabled"
+  local disabled_str = 
+
+  vim.print("nes " .. enabled_str)
+end)
 
 
 --- }}}
