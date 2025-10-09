@@ -1,7 +1,6 @@
 -- vim:foldmethod=marker
 --- {{{ options
 
-
 vim.opt.hidden = false
 vim.opt.mouse = "a"
 vim.opt.mousemodel = "popup_setpos"
@@ -63,13 +62,16 @@ vim.pack.add({
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
   { src = "https://github.com/ibhagwan/fzf-lua" },
   { src = "https://github.com/windwp/nvim-autopairs" },
-  { src = "https://github.com/norcalli/nvim-colorizer.lua" },
+  { src = "https://github.com/catgoose/nvim-colorizer.lua" },
   { src = "https://github.com/Saghen/blink.cmp" },
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/nvim-lualine/lualine.nvim" },
   { src = "https://github.com/Exafunction/windsurf.nvim" },
   { src = "https://github.com/stevearc/conform.nvim" },
-  { src = "https://github.com/stevearc/oil.nvim" }
+  { src = "https://github.com/stevearc/oil.nvim" },
+  { src = "https://github.com/copilotlsp-nvim/copilot-lsp" },
+  { src = "https://github.com/zbirenbaum/copilot.lua" },
+  { src = "https://github.com/folke/sidekick.nvim" }
 })
 
 --- }}}
@@ -648,6 +650,12 @@ _G.fuzzy_search_operator = fuzzy_search_operator
 -- whereas gt is useful for going to different tabs
 vim.keymap.set('n', 'gz', fuzzy_search_operator, { expr = true })
 
+vim.keymap.set('n', '<Tab>', function() 
+  if not require("sidekick").nes_jump_or_apply() then
+    return "<Tab>"
+  end
+end, { expr = true })
+
 --- }}}
 --- {{{ lsp
 
@@ -659,26 +667,24 @@ vim.lsp.enable("yamlls")
 vim.lsp.enable("terraformls")
 vim.lsp.enable("cssmodules_ls")
 
---- }}}
---- {{{ codeium
-
--- require("codeium").setup({
---   enable_cmp_source = false,
---   virtual_text = {
---     enabled = true,
---     map_keys = true,
---     key_bindings = {
---       accept = "<S-CR>",
---       accept_word = false,
---       accept_line = false,
---       clear = false,
---       prev = false,
---       next = false,
---     }
---   }
--- })
+vim.lsp.inline_completion.enable() -- to turn it on
 
 --- }}}
+
+--- {{{ copilot
+
+require("copilot").setup({})
+require("sidekick").setup({})
+
+vim.keymap.set('i', '<S-Cr>', function()
+  if not vim.lsp.inline_completion.get() then
+    return '<S-Cr>'
+  end
+end, { expr = true })
+
+
+--- }}}
+
 --- {{{ blink
 
 require("blink-cmp").setup({
