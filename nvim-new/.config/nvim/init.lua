@@ -66,12 +66,8 @@ vim.pack.add({
   { src = "https://github.com/Saghen/blink.cmp" },
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/nvim-lualine/lualine.nvim" },
-  { src = "https://github.com/Exafunction/windsurf.nvim" },
   { src = "https://github.com/stevearc/conform.nvim" },
   { src = "https://github.com/stevearc/oil.nvim" },
-  { src = "https://github.com/copilotlsp-nvim/copilot-lsp" },
-  { src = "https://github.com/zbirenbaum/copilot.lua" },
-  { src = "https://github.com/folke/sidekick.nvim" }
 })
 
 --- }}}
@@ -651,14 +647,10 @@ _G.fuzzy_search_operator = fuzzy_search_operator
 -- whereas gt is useful for going to different tabs
 vim.keymap.set('n', 'gz', fuzzy_search_operator, { expr = true })
 
-vim.keymap.set('n', '<Tab>', function() 
-  if not require("sidekick").nes_jump_or_apply() then
-    return "<Tab>"
-  end
-end, { expr = true })
-
 --- }}}
 --- {{{ lsp
+
+vim.lsp.inline_completion.enable(true) -- to turn it on
 
 vim.lsp.enable("ts_ls")
 vim.lsp.enable("eslint")
@@ -667,39 +659,17 @@ vim.lsp.enable("jsonls")
 vim.lsp.enable("yamlls")
 vim.lsp.enable("terraformls")
 vim.lsp.enable("cssmodules_ls")
-
-vim.lsp.inline_completion.enable() -- to turn it on
+vim.lsp.enable("copilot")
 
 --- }}}
 
 --- {{{ copilot
-
-require("copilot").setup({})
 
 vim.keymap.set('i', '<S-Cr>', function()
   if not vim.lsp.inline_completion.get() then
     return '<S-Cr>'
   end
 end, { expr = true })
-
--- disabled by default
-vim.g.sidekick_nes = false
-
--- when we use keybinding, lazy load and enable
-vim.keymap.set('n', 'gai', function()
-  vim.g.sidekick_nes = not vim.g.sidekick_nes
-
-  require("sidekick").setup({
-    nes = {
-      enabled = vim.g.sidekick_nes
-    }
-  })
-
-  local enabled_str = vim.g.sidekick_nes and "enabled" or "disabled"
-  local disabled_str = 
-
-  vim.print("nes " .. enabled_str)
-end)
 
 
 --- }}}
