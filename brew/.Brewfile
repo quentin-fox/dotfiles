@@ -24,6 +24,7 @@ brew 'gcc'
 
 # misc. cli tools
 
+brew 'nss'
 brew 'asdf'
 brew 'cloc'
 brew 'fd'
