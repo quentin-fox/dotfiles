@@ -475,6 +475,7 @@ require("nvim-treesitter.configs").setup {
     "jsonc",
     "lua",
     "markdown",
+    "python",
     "ruby",
     "scss",
     "svelte",
@@ -660,6 +661,7 @@ vim.lsp.enable("yamlls")
 vim.lsp.enable("terraformls")
 vim.lsp.enable("cssmodules_ls")
 vim.lsp.enable("copilot")
+vim.lsp.enable("pyright")
 
 --- }}}
 

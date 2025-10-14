@@ -6,3 +6,4 @@ typescript-language-server
 zapier-platform-cli
 detox-cli
 @github/copilot-language-server
+pyright
