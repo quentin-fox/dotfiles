@@ -16,6 +16,8 @@ set -x __DEV__ "true"
 set -x CLOUDSDK_PYTHON python
 set -x CLOUDSDK_PYTHON_SITEPACKAGES 1
 
+set -x RIPGREP_CONFIG_PATH "$HOME/.ripgreprc"
+
 # required for fastlane
 # see: https://docs.fastlane.tools/getting-started/ios/setup/
 

@@ -459,6 +459,7 @@ require("nvim-treesitter.configs").setup {
   ensure_installed = {
     "bash",
     "css",
+    "dockerfile",
     "fish",
     "gitignore",
     "git_config",
@@ -478,6 +479,7 @@ require("nvim-treesitter.configs").setup {
     "python",
     "ruby",
     "scss",
+    "sql",
     "svelte",
     "templ",
     "terraform",
@@ -614,8 +616,9 @@ local fzf = require("fzf-lua")
 
 vim.keymap.set("n", "<C-k>", fzf.builtin)
 vim.keymap.set("n", "<C-p>", fzf.files)
-vim.keymap.set("n", "<C-l>", fzf.live_grep)
-vim.keymap.set("n", "<C-g>", fzf.grep_project)
+vim.keymap.set("n", "<C-l>", function() fzf.live_grep({
+  hidden = true
+}) end)
 
 local function fuzzy_search_operator(motion)
   if motion == nil then
