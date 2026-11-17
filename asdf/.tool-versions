@@ -1,5 +1,6 @@
-nodejs 22.20.0
-python 3.13.8
-ruby 3.2.2
+nodejs 22.23.4
+python 3.9.5
 java zulu-17.50.19
 gcloud 471.0.0
+deno 2.7.5
+ruby 3.4.11

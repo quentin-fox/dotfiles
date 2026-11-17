@@ -55,19 +55,18 @@ vim.pack.add({
   { src = "https://github.com/rebelot/kanagawa.nvim" },
   { src = "https://github.com/f-person/auto-dark-mode.nvim" },
   { src = "https://github.com/tpope/vim-surround" },
-  { src = "https://github.com/tpope/vim-commentary" },
   { src = "https://github.com/tpope/vim-fugitive" },
   { src = "https://github.com/tpope/vim-rhubarb" },
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
   { src = "https://github.com/ibhagwan/fzf-lua" },
   { src = "https://github.com/windwp/nvim-autopairs" },
   { src = "https://github.com/catgoose/nvim-colorizer.lua" },
-  { src = "https://github.com/Saghen/blink.cmp" },
+  { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("^1") },
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/nvim-lualine/lualine.nvim" },
   { src = "https://github.com/stevearc/conform.nvim" },
   { src = "https://github.com/stevearc/oil.nvim" },
+  { src = "https://github.com/vale1410/vim-minizinc" },
 })
 
 --- }}}
@@ -455,8 +454,7 @@ require("auto-dark-mode").setup({
 --- }}}
 --- {{{ treesitter
 
-require("nvim-treesitter.configs").setup {
-  ensure_installed = {
+require("nvim-treesitter").install {
     "bash",
     "css",
     "dockerfile",
@@ -466,6 +464,7 @@ require("nvim-treesitter.configs").setup {
     "gleam",
     "go",
     "gomod",
+    "groovy",
     "haskell",
     "hcl",
     "html",
@@ -476,6 +475,7 @@ require("nvim-treesitter.configs").setup {
     "jsonc",
     "lua",
     "markdown",
+    "markdown_inline",
     "python",
     "ruby",
     "scss",
@@ -487,36 +487,26 @@ require("nvim-treesitter.configs").setup {
     "tsx",
     "typescript",
     "vimdoc",
+    "xml",
     "yaml",
-  },
-  highlight = {
-    enable = true
-  },
-  indent = {
-    enable = true
-  },
-  textobjects = {
-    select = {
-      enable = true,
-      keymaps = {
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
-      },
-    },
-  },
-
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "g<CR>",
-      scope_incremental = "<CR>",
-      node_incremental = "<TAB>",
-      node_decremental = "<S-TAB>",
-    },
-  },
 }
+
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function(event)
+    local lang = vim.treesitter.language.get_lang(event.match)
+    if not lang or not vim.treesitter.language.add(lang) then
+      return
+    end
+
+    if vim.treesitter.query.get(lang, "highlights") then
+      vim.treesitter.start(event.buf, lang)
+    end
+
+    if vim.treesitter.query.get(lang, "indents") then
+      vim.bo[event.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
+  end,
+})
 
 --- }}}
 --- {{{ plugin setup
@@ -531,17 +521,6 @@ require("fzf-lua").setup({
   { "default" }
 })
 
-require("conform").setup({
-    notify_on_error = true,
-    formatters_by_ft = {
-        javascript = { "prettier" },
-        typescript = { "prettier" },
-        javascriptreact = { "prettier" },
-        typescriptreact = { "prettier" },
-        html = { "prettier" },
-    },
-})
-
 require("oil").setup({
   view_options = {
     show_hidden = true
@@ -550,8 +529,6 @@ require("oil").setup({
 
 --- }}}
 --- {{{ core keybinds
-
-vim.keymap.set("n", "U", "<C-r>")
 
 -- align text after jumping
 
@@ -563,14 +540,6 @@ vim.keymap.set("n", "N", "Nzz")
 -- gp to select what was last pasted
 
 vim.keymap.set("n", "gp", "`[v`]")
-
--- simpler window navigation
-
--- local win_keys = { "<C-h>", "<C-j>", "<C-k>", "<C-l>" }
-
--- for _, key in ipairs(win_keys) do
-  -- vim.keymap.set("n", key, "<C-w>" .. key)
--- end
 
 -- linewise navigation on wrapped lines
 
@@ -586,8 +555,6 @@ end, { expr = true })
 vim.keymap.set("n", "X", ":s/<C-r><C-w>//g<Left><Left>")
 
 -- clear highlight
-
-vim.keymap.set("n", "-", "<cmd>nohlsearch<Cr>", { silent = true })
 
 vim.keymap.set('n', 'gK', function()
   local config = vim.diagnostic.config()
@@ -605,8 +572,6 @@ end)
 --- }}}
 --- {{{ plugin keybinds
 
-vim.keymap.set("n", "<leader>pr", function() require("conform").format({ async = true, lsp_fallback = true }) end)
-
 vim.keymap.set("n", "~", "<cmd>Git<Cr>")
 
 vim.keymap.set("n", "gn", "<cmd>edit .<Cr>")
@@ -617,7 +582,8 @@ local fzf = require("fzf-lua")
 vim.keymap.set("n", "<C-k>", fzf.builtin)
 vim.keymap.set("n", "<C-p>", fzf.files)
 vim.keymap.set("n", "<C-l>", function() fzf.live_grep({
-  hidden = true
+  hidden = true,
+  rg_opts = [[--column --line-number --no-heading --color=always --smart-case --max-columns=4096 -g "!.git" -e]],
 }) end)
 
 local function fuzzy_search_operator(motion)
@@ -654,28 +620,48 @@ vim.keymap.set('n', 'gz', fuzzy_search_operator, { expr = true })
 --- }}}
 --- {{{ lsp
 
-vim.lsp.inline_completion.enable(true) -- to turn it on
+vim.lsp.inline_completion.enable(false) -- to turn it on
 
-vim.lsp.enable("ts_ls")
-vim.lsp.enable("eslint")
-vim.lsp.enable("prettier")
+vim.g.tsc_makeprg = "yarn run tsc"
+
+if vim.fn.fnamemodify(vim.fn.getcwd(), ':t') == 'round-robin' then
+  vim.g.tsc_makeprg = "npm run typecheck"
+  vim.lsp.enable("tsc")
+elseif vim.fn.fnamemodify(vim.fn.getcwd(), ':t') == 'osbackendapi' then
+  vim.lsp.enable("tsc")
+  vim.lsp.enable("oxlint")
+  vim.lsp.enable("oxfmt")
+
+  vim.keymap.set("n", "<leader>pr", function()
+    vim.lsp.buf.format({ name = "oxfmt", async = true })
+  end)
+else
+  vim.g.tsc_makeprg = "yarn run tsc"
+  vim.lsp.enable("ts_ls")
+  vim.lsp.enable("eslint")
+  vim.lsp.enable("prettier")
+
+  require("conform").setup({
+      notify_on_error = true,
+      formatters_by_ft = {
+          javascript = { "prettier" },
+          typescript = { "prettier" },
+          javascriptreact = { "prettier" },
+          typescriptreact = { "prettier" },
+          html = { "prettier" },
+      },
+  })
+
+  vim.keymap.set("n", "<leader>pr", function() require("conform").format({ async = true, lsp_fallback = true }) end)
+end
+
 vim.lsp.enable("jsonls")
 vim.lsp.enable("yamlls")
 vim.lsp.enable("terraformls")
 vim.lsp.enable("cssmodules_ls")
-vim.lsp.enable("copilot")
 vim.lsp.enable("pyright")
-
---- }}}
-
---- {{{ copilot
-
-vim.keymap.set('i', '<S-Cr>', function()
-  if not vim.lsp.inline_completion.get() then
-    return '<S-Cr>'
-  end
-end, { expr = true })
-
+vim.lsp.enable("tailwindcss")
+vim.lsp.enable("denols")
 
 --- }}}
 
@@ -685,6 +671,13 @@ require("blink-cmp").setup({
   fuzzy = { implementation = "lua" },
   sources = {
     default = { "lsp", "path" },
+  },
+  completion = {
+    accept = {
+      auto_brackets = {
+        enabled = false
+      }
+    }
   }
 })
 

@@ -41,6 +41,7 @@ brew 'xcbeautify'
 brew 'sops'
 brew 'terraform'
 brew 'caddy'
+brew 'tree-sitter-cli'
 
 # vendor-specific tools
 

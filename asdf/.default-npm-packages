@@ -7,3 +7,5 @@ zapier-platform-cli
 detox-cli
 @github/copilot-language-server
 pyright
+@tailwindcss/language-server
+@typescript/native-preview
